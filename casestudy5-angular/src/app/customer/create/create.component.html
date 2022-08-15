@@ -1,0 +1,83 @@
+
+<body>
+<div>
+  <div class="row container-fluid" style="height: 20px; background-color:#4cd7c845"></div>
+
+  <nav class="navbar navbar-expand-lg navbar-dark "
+       style="background-color: #046056;position: sticky;top: 0;z-index: 1;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="">Home</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    </div>
+    <div class="container-fluid">
+      <a class="navbar-brand" href="">Create Customer</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+
+  <div class="body_center-2 container">
+    <div class="vc_empty_space" style="height: 32px"><span class="vc_empty_space_inner"></span></div>
+
+    <form method="post">
+
+      <div class="mb-3">
+        <label class="form-label"> Type</label>
+        <select name="type" id="type" class="form-control">
+          <option value=" ">Choose</option>
+          <option value="silver">Silver</option>
+          <option value="gold">Gold</option>
+          <option value="platinum">Platinum</option>
+          <option value="diamond">Diamond</option>
+        </select>
+
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input class="form-control" type="text">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Birth Day</label>
+        <input class="form-control" type="date">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"> Phone</label>
+        <input class="form-control" type="number">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"> Email</label>
+        <input class="form-control" type="text">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"> Address</label>
+        <input class="form-control" type="text">
+      </div>
+
+      <div class="justify-content-center">
+        <input type="submit" class="btn btn-outline-primary" value="Create">
+      </div>
+    </form>
+
+  </div>
+
+</div>
+</body>
+
