@@ -10,8 +10,6 @@ export class CalculatorComponent implements OnInit {
   value2: number;
   total: number;
   error = '';
-
-
   constructor() {
   }
 
@@ -37,6 +35,5 @@ export class CalculatorComponent implements OnInit {
           return this.error = '';
         }
     }
-
   }
 }
