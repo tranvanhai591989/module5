@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./picker-color.component.css']
 })
 export class PickerColorComponent implements OnInit {
-  color = '';
+  color: string ;
 
   constructor() {
   }
