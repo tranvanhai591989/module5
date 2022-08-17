@@ -1,0 +1,137 @@
+
+<div class="body_center_2 container">
+  <table id="product" class="table table-success table-striped">
+    <thead>
+    <tr class="table-info">
+      <th>#</th>
+      <th>Facility</th>
+      <th>Customer</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Deposit</th>
+      <th>Total</th>
+      <th>Accompanying Services</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>1</td>
+      <td>Villa</td>
+      <td>Tran Van Hai</td>
+      <td>2022-6-15</td>
+      <td>2022-6-19</td>
+      <td>1500000</td>
+      <td>7000000</td>
+      <td>
+        <div class="row">
+          <div class="col-md-2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModalContractDetail">
+              +
+            </button>
+          </div>
+          <div class="col-md-10">
+            <a style="padding-left: 15px" class="btn btn-primary">
+              Accompanying list
+            </a>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="modal fade" id="exampleModalContractDetail" tabindex="-1" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabelContractDetail">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!--                <input type="text" hidden th:value="${contractId}" id="contractId">-->
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Start Date</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="starDate">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">End Date </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="endDate">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Deposit</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="deposit">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Total</label>
+            <div class="col-sm-10">
+              <input type="text" disabled class="form-control" id="total">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Customer Name</label>
+            <div class="col-sm-10">
+              <select class="form-select" aria-label="Default select example" id="customerId">
+
+              </select>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Service</label>
+            <div class="col-sm-10">
+
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Dich vu dinh kem</label>
+            <div class="col-sm-10">
+              <button class="btn btn-primary" onclick="btnAttachFacility()">+</button>
+
+              <table class="table" id="attachFacility">
+                <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Attach Facility Name</th>
+                  <th>Cost</th>
+                  <th>Attach Unit</th>
+                  <th>Attach Status</th>
+                  <th>Quantity</th>
+                </tr>
+                </thead>
+                <!--                <tbody>-->
+                <!--                <tr th:each="item:${attachFacilityS}">-->
+                <!--                  <td th:text="${item.getAttachFacilityId()}"></td>-->
+                <!--                  <td hidden>-->
+                <!--                    <input type="text" th:value="${item.getAttachFacilityId()}" name="attachId">-->
+                <!--                  </td>-->
+                <!--                  <td th:text="${item.getAttachFacilityName()}"></td>-->
+                <!--                  <td th:text="${item.getAttachFacilityCost()}"></td>-->
+                <!--                  <td hidden>-->
+                <!--                    <input type="text" name="facilityCost" th:value="${item.getAttachFacilityCost()}">-->
+                <!--                  </td>-->
+                <!--                  <td th:text="${item.getAttachFacilityUnit()}"></td>-->
+                <!--                  <td th:text="${item.getAttachFacilityStatus()}"></td>-->
+                <!--                  <td>-->
+                <!--                    <input type="number" class="form-control quantity" name="quantity">-->
+                <!--                  </td>-->
+                <!--                </tr>-->
+                <!--                </tbody>-->
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="addContractDetail()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
