@@ -10,13 +10,13 @@ import {RegisterService} from '../service/register.service';
 export class FormComponent implements OnInit {
 
   registerForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
     country: new FormControl('', [Validators.required]),
     age: new FormControl('', [Validators.required, Validators.min(18)]),
     gender: new FormControl('', [Validators.required]),
-    phone: new FormControl('', [Validators.required, Validators.pattern('^\\[+84]+\\d{9,10}$')])
+    phone: new FormControl('', [Validators.required, Validators.pattern(/^[\+84][0-9]{9,10}$/)])
   }, this.checkPasswords);
 
   constructor(private registerService: RegisterService) {
