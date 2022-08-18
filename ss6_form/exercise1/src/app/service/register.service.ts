@@ -11,10 +11,6 @@ export class RegisterService {
 
   registers: Register[] = [];
 
-  getAll() {
-    return this.registers;
-  }
-
   saveRegister(register: Register) {
     this.registers.push(register);
 
