@@ -1,0 +1,164 @@
+<div>
+  <div class="vc_empty_space" style="height: 32px"><span class="vc_empty_space_inner"></span></div>
+  <div class="container-fluid">
+    <div style="text-align: center">
+      <a href="http://localhost:4200/customer/create" class="btn btn-outline-success">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus"
+             viewBox="0 0 16 16">
+          <path
+            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+          <path fill-rule="evenodd"
+                d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+        </svg>
+        Create</a>
+    </div>
+  </div>
+  <div class="vc_empty_space" style="height: 32px"><span class="vc_empty_space_inner"></span></div>
+  <div class="body_center_2 container">
+    <div style="text-align: center">
+      <div class="notify">
+        <div>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <table id="product" class="table table-success table-striped">
+      <thead>
+      <tr class="table-info">
+        <th>No</th>
+        <th>Name</th>
+        <th>Birthday</th>
+        <th>Gender</th>
+        <th>Id Card</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Type</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let customer of customers ; index as i ">
+        <td>{{i + 1}}</td>
+        <td>{{customer.name}}</td>
+        <td>{{customer.birthday | date : "dd/MM/yyyy"}}</td>
+        <td>{{customer.gender}}</td>
+        <td>{{customer.idCard}}</td>
+        <td>{{customer.phone}}</td>
+        <td>{{customer.email}}</td>
+        <td>{{customer.address}}</td>
+        <td>{{customer.customerType}}</td>
+        <td>
+          <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                  data-bs-target="#edit"
+                  [routerLink]="['/customer/edit', customer.id]">
+            Edit
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
+            Delete
+          </button>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- Button trigger modal -->
+
+  <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel1">Delete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Do you want delete customer Tran Van Hai
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <!--  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+  <!--    <div class="modal-dialog">-->
+  <!--      <div class="modal-content">-->
+  <!--        <div class="modal-header">-->
+  <!--          <h5 class="modal-title" id="exampleModalLabel">Edit</h5>-->
+  <!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+  <!--        </div>-->
+  <!--        <div class="modal-body">-->
+  <!--          <form method="post">-->
+
+  <!--            <div class="mb-3">-->
+  <!--              <label class="form-label">Name</label>-->
+  <!--              <input class="form-control" type="text">-->
+  <!--            </div>-->
+
+  <!--            <div class="mb-3">-->
+  <!--              <label class="form-label">Birth Day</label>-->
+  <!--              <input class="form-control" type="date">-->
+  <!--            </div>-->
+
+  <!--            <div class="mb-3">-->
+  <!--              <label class="form-label">Gender</label>-->
+  <!--              <select name="gender" class="form-control">-->
+  <!--                <option value="">&#45;&#45;00&#45;&#45;</option>-->
+  <!--                <option value="Male">Male</option>-->
+  <!--                <option value="Female">Female</option>-->
+  <!--              </select>-->
+  <!--            </div>-->
+
+
+  <!--            <div class="mb-3">-->
+  <!--              <label class="form-label"> Id Card</label>-->
+  <!--              <input class="form-control" type="number">-->
+  <!--            </div>-->
+
+  <!--            <div class="mb-3">-->
+  <!--              <label class="form-label"> Phone</label>-->
+  <!--              <input class="form-control" type="number">-->
+  <!--            </div>-->
+
+  <!--            <div class="mb-3">-->
+  <!--              <label class="form-label"> Email</label>-->
+  <!--              <input class="form-control" type="text">-->
+  <!--            </div>-->
+
+  <!--            <div class="mb-3">-->
+  <!--              <label class="form-label"> Address</label>-->
+  <!--              <input class="form-control" type="text">-->
+  <!--            </div>-->
+  <!--            <div class="mb-3">-->
+  <!--              <label class="form-label"> Type</label>-->
+  <!--              <select name="type" id="type" class="form-control">-->
+  <!--                <option value=" ">Choose</option>-->
+  <!--                <option value="silver">Silver</option>-->
+  <!--                <option value="gold">Gold</option>-->
+  <!--                <option value="platinum">Platinum</option>-->
+  <!--                <option value="diamond">Diamond</option>-->
+  <!--              </select>-->
+  <!--            </div>-->
+  <!--          </form>-->
+  <!--        </div>-->
+  <!--        <div class="modal-footer">-->
+  <!--          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+  <!--          <button type="button" class="btn btn-warning">Edit</button>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+</div>
+
+

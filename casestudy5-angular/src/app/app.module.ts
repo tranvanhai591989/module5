@@ -1,36 +1,48 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
-// import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
-import {FotterComponent} from './fotter/fotter.component';
 import {HomeComponent} from './home/home.component';
-import {CreateComponent} from './customer/create/create.component';
-import {IndexComponent} from './customer/index/index.component';
-import {ListComponent} from './contract/list/list.component';
+
 import {RouterModule, Routes} from '@angular/router';
+import {CustomerCreateComponent} from './customer/customer-create/customer-create.component';
+import {CustomerIndexComponent} from './customer/customer-index/customer-index.component';
+import {CustomerEditComponent} from './customer/customer-edit/customer-edit.component';
+import {FacilityCreateComponent} from './facility/facility-create/facility-create.component';
+import {FacilityIndexComponent} from './facility/facility-index/facility-index.component';
+import {ContractIndexComponent} from './contract/contract-index/contract-index.component';
+import {FacilityEditComponent} from './facility/facility-edit/facility-edit.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {AppRoutingModule} from './app-routing.module';
+import {FooterComponent} from './footer/footer.component';
+import { ContractCreateComponent } from './contract/contract-create/contract-create.component';
+import { CustomerTypeComponent } from './customer/customer-type/customer-type.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
-  {path: 'home', component: HomeComponent},
-  {path: 'customer', component: IndexComponent},
-  {path: 'customer/create', component: CreateComponent},
+
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FotterComponent,
+    FooterComponent,
     HomeComponent,
-    CreateComponent,
-    IndexComponent,
-    ListComponent
+    CustomerCreateComponent,
+    CustomerIndexComponent,
+    CustomerEditComponent,
+    FacilityCreateComponent,
+    FacilityIndexComponent,
+    ContractIndexComponent,
+    FacilityEditComponent,
+    FooterComponent,
+    ContractCreateComponent,
+    CustomerTypeComponent,
   ],
   imports: [RouterModule.forRoot(routes),
-    BrowserModule,
-    // AppRoutingModule
+    BrowserModule, ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

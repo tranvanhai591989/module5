@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+    <div style="text-align: center"><h3>Create Customer</h3></div>
+
+    <div class="col-3"></div>
+    <div class="col-6">
+
+      <div class="body_center-2 container">
+        <div class="vc_empty_space" style="height: 32px"><span class="vc_empty_space_inner"></span></div>
+        <form [formGroup]="customerForm" (ngSubmit)="submit()" novalidate>
+          <div class="mb-3">
+            <label class="form-label">Id</label>
+            <input class="form-control" type="id" formControlName="id">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control" type="text" formControlName="name">
+          </div>
+          <div style="color: red"
+               *ngIf="customerForm.controls.name?.valid&&(customerForm.controls.name?.dirty||customerForm.controls.name?.touched)">
+            Name has Uppercase
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Birth Day</label>
+            <input class="form-control" type="date" formControlName="birthday">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <select name="gender" class="form-control" formControlName="gender">
+              <option value="" [defaultSelected]="customerForm">--00--</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+
+
+          <div class="mb-3">
+            <label class="form-label"> Id Card</label>
+            <input class="form-control" type="number" formControlName="idCard">
+          </div>
+          <div style="color: red"
+               *ngIf="customerForm.controls.idCard?.valid&&(customerForm.controls.idCard?.dirty||customerForm.controls.idCard?.touched)">
+            Id Card has 9 digital
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"> Phone</label>
+            <input class="form-control" type="number" formControlName="phone">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"> Email</label>
+            <input class="form-control" type="text" formControlName="email">
+          </div>
+          <div style="color: red"
+               *ngIf="customerForm.controls.email?.valid&&(customerForm.controls.email?.dirty||customerForm.controls.email?.touched)">
+            Wrong Format
+          </div>
+          <div class="mb-3">
+            <label class="form-label"> Address</label>
+            <input class="form-control" type="text" formControlName="address">
+          </div>
+          <div class="mb-3">
+            <label class="form-label"> Type</label>
+            <select name="type" id="type" class="form-control" formControlName="customerType">
+              <option value=" " [defaultSelected]="customerForm">Choose</option>
+              <option value="Silver">Silver</option>
+              <option value="Gold">Gold</option>
+              <option value="Platinum">Platinum</option>
+              <option value="Diamond">Diamond</option>
+            </select>
+          </div>
+          <div class="mb-3" style="text-align: center">
+            <input value="Create" type="submit" class="btn btn-primary" [disabled]="!customerForm.valid" >&nbsp;
+                        <a  type="button" class="btn btn-danger" [routerLink]="['/customer']">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-3"></div>
+
+  </div>
+</div>
