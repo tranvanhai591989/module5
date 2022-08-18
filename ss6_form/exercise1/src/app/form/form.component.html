@@ -1,0 +1,81 @@
+<div class="row container">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <h1>Register Page</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="submit()" novalidate>
+
+      <div>
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email">
+        <div *ngIf="!registerForm.controls.email?.valid&&registerForm.controls.email?.touched" style="color: red">Email
+          wrong format
+        </div>
+      </div>
+
+      <div>
+        <label for="password" class="form-label">Password</label>
+        <input type="text" class="form-control" id="password" formControlName="password" placeholder="Password"
+               name="password">
+
+        <p *ngIf="registerForm.controls.password.hasError('required')&& registerForm.controls.password.touched ">No
+          Required</p>
+        <p *ngIf="registerForm.controls.password.hasError('minlength')"> Password than less 6 character</p>
+
+
+      </div>
+
+      <div>
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input type="text" class="form-control" id="confirmPassword" formControlName="confirmPassword"
+               placeholder="confirmPassword"
+               name="confirmPassword">
+        <p *ngIf="registerForm.hasError('checkPass')" style="color: red"> Dont matcher
+        </p>
+
+      </div>
+
+      <div>
+        <label for="country" class="form-label">Country</label>
+        <input type="text" class="form-control" id="country" formControlName="country">
+        <div *ngIf="!registerForm.controls.country?.valid&&registerForm.controls.country?.touched" style="color: red">
+          Country wrong format
+        </div>
+      </div>
+
+      <div>
+        <label for="age" class="form-label">Age</label>
+        <input type="number" class="form-control" id="age" formControlName="age">
+        <p *ngIf="registerForm.controls.age.hasError('required')&& registerForm.controls.age.touched "
+           style="color:red;">No
+          Required</p>
+        <p *ngIf="registerForm.controls.age.hasError('min')" style="color:red;">Age is than 18</p>
+      </div>
+
+      <div>
+        <label for="gender" class="form-label">Gender</label>
+        <select name="" id="gender" formControlName="gender" class="form-control" defa>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="phone" class="form-label">Phone Number</label>
+        <input type="number" class="form-control" id="phone" formControlName="phone">
+        <div *ngIf="!registerForm.controls.phone?.valid&&registerForm.controls.phone?.touched" style="color: red">Phone
+          wrong format
+        </div>
+      </div>
+      <br>
+
+      <div style="text-align: center">
+        <button type="submit" [disabled]="!registerForm.valid" class="btn btn-success">Submit</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-3"></div>
+</div>
+
+
+
+
