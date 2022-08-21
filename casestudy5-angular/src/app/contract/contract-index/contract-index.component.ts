@@ -40,7 +40,7 @@ export class ContractIndexComponent implements OnInit {
 
   submit() {
     const contract = this.contractForm.value;
-    this.customerService.saveCustomer(contract);
+    this.contractService.saveContract(contract);
     this.contractForm.reset();
     this.router.navigate(['/contract']);
   }

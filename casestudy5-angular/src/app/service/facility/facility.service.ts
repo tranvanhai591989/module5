@@ -94,4 +94,8 @@ export class FacilityService {
       return facility.id !== id;
     });
   }
+
+  saveContract(contract: any) {
+    
+  }
 }

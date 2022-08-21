@@ -54,7 +54,6 @@ export class CustomerService {
   }
 
   saveCustomer(customer: Customer) {
-
     this.customers.push(customer);
   }
 
@@ -64,7 +63,7 @@ export class CustomerService {
 
   updateCustomer(id: number, customer: Customer) {
     for (const item of this.customerTypes) {
-      if (customer.customerType === item.name) {
+      if (customer.customerType.name === item.name) {
         customer.customerType = item;
       }
     }
