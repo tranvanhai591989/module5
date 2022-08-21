@@ -7,12 +7,10 @@
 
       <div class="body_center-2 container">
         <div class="vc_empty_space" style="height: 32px"><span class="vc_empty_space_inner"></span></div>
-
         <form [formGroup]="customerForm" (ngSubmit)="submit()" novalidate>
-
           <div class="mb-3">
             <label class="form-label">Id</label>
-            <input class="form-control" type="id" formControlName="id">
+            <input class="form-control" type="number" formControlName="id">
           </div>
 
           <div class="mb-3">
@@ -20,9 +18,8 @@
             <input class="form-control" type="text" formControlName="name">
           </div>
           <div style="color: red"
-               *ngIf="customerForm.controls.name?.valid&&(customerForm.controls.name?.dirty||customerForm.controls.name?.touched)"
-          >
-            Te phai viet hoa
+               *ngIf="customerForm.controls.name.hasError('pattern')&&customerForm.controls.name.touched">
+            Name has Uppercase
           </div>
           <div class="mb-3">
             <label class="form-label">Birth Day</label>
@@ -33,7 +30,7 @@
             <label class="form-label">Gender</label>
             <select name="gender" class="form-control" formControlName="gender">
               <option value="">--00--</option>
-              <option value="Male">Male</option>
+              <option value="Male" [defaultSelected]="">Male</option>
               <option value="Female">Female</option>
             </select>
           </div>
@@ -41,42 +38,50 @@
 
           <div class="mb-3">
             <label class="form-label"> Id Card</label>
-            <input class="form-control" type="number" formControlName="idCard">
+            <input class="form-control" type="text" formControlName="idCard">
+          </div>
+          <div style="color: red"
+               *ngIf="customerForm.controls.idCard.hasError('pattern')&&customerForm.controls.idCard?.touched">
+            Id Card has 9 digital
           </div>
 
           <div class="mb-3">
             <label class="form-label"> Phone</label>
-            <input class="form-control" type="number" formControlName="phone">
+            <input class="form-control" type="text" formControlName="phone">
+            <div style="color: red"
+                 *ngIf="customerForm.controls.phone.hasError('pattern')&&customerForm.controls.phone?.touched">
+              Id Card has 9 digital
+            </div>
           </div>
 
           <div class="mb-3">
             <label class="form-label"> Email</label>
             <input class="form-control" type="text" formControlName="email">
           </div>
-
+          <div style="color: red"
+               *ngIf="customerForm.controls.email.hasError('email')&&customerForm.controls.email.touched">
+            Wrong Format
+          </div>
           <div class="mb-3">
             <label class="form-label"> Address</label>
             <input class="form-control" type="text" formControlName="address">
           </div>
           <div class="mb-3">
             <label class="form-label"> Type</label>
-            <select name="type" id="type" class="form-control" formControlName="customerType">
-              <option value=" ">Choose</option>
-              <option value="silver">Silver</option>
-              <option value="gold">Gold</option>
-              <option value="platinum">Platinum</option>
-              <option value="diamond">Diamond</option>
+            <select  class="form-control" formControlName="customerType" >
+              <option value="" disabled selected="selected">Please choose</option>
+              <option *ngFor="let customerType of customerTypes"
+                      [ngValue]="customerType.name">{{customerType.name}}</option>
             </select>
           </div>
           <div class="mb-3" style="text-align: center">
-
-            <button type="submit" class="btn btn-primary" [disabled]="!customerForm.valid">Edit</button>&nbsp;
-
-            <a href="" type="button" class="btn btn-danger">Cancel</a>
+            <input value="Edit" type="submit" class="btn btn-primary" [disabled]="!customerForm.valid">&nbsp;
+            <a type="button" class="btn btn-danger" [routerLink]="['/customer']">Cancel</a>
           </div>
         </form>
       </div>
     </div>
     <div class="col-3"></div>
+
   </div>
 </div>

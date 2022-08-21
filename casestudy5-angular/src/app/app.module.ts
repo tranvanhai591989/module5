@@ -15,8 +15,10 @@ import {FacilityEditComponent} from './facility/facility-edit/facility-edit.comp
 import {ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {FooterComponent} from './footer/footer.component';
-import { ContractCreateComponent } from './contract/contract-create/contract-create.component';
-import { CustomerTypeComponent } from './customer/customer-type/customer-type.component';
+import {ContractCreateComponent} from './contract/contract-create/contract-create.component';
+import {CustomerTypeComponent} from './customer/customer-type/customer-type.component';
+import {FacilityDetailComponent} from './facility/facility-detail/facility-detail.component';
+import {HttpClientModule} from '@angular/common/http';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -39,9 +41,10 @@ const routes: Routes = [
     FooterComponent,
     ContractCreateComponent,
     CustomerTypeComponent,
+    FacilityDetailComponent,
   ],
   imports: [RouterModule.forRoot(routes),
-    BrowserModule, ReactiveFormsModule,
+    BrowserModule, ReactiveFormsModule, HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

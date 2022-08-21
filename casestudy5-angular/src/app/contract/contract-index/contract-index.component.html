@@ -1,42 +1,39 @@
-
 <div class="body_center_2 container">
+  <div class="vc_empty_space" style="height: 32px"><span class="vc_empty_space_inner"></span></div>
+  <div class="container-fluid">
+    <div style="text-align: center">
+      <button type="button" data-bs-toggle="modal"  data-bs-target="#exampleModalContractDetail" class="btn btn-outline-success">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus"
+             viewBox="0 0 16 16">
+          <path
+            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+          <path fill-rule="evenodd"
+                d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+        </svg>
+        Create
+      </button>
+    </div>
+    <div class="vc_empty_space" style="height: 32px"><span class="vc_empty_space_inner"></span></div>
+
+  </div>
   <table id="product" class="table table-success table-striped">
     <thead>
     <tr class="table-info">
       <th>#</th>
-      <th>Facility</th>
       <th>Customer</th>
+      <th>Facility</th>
       <th>Start Date</th>
       <th>End Date</th>
       <th>Deposit</th>
-      <th>Total</th>
-      <th>Accompanying Services</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>1</td>
-      <td>Villa</td>
-      <td>Tran Van Hai</td>
-      <td>2022-6-15</td>
-      <td>2022-6-19</td>
-      <td>1500000</td>
-      <td>7000000</td>
-      <td>
-        <div class="row">
-          <div class="col-md-2">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#exampleModalContractDetail">
-              +
-            </button>
-          </div>
-          <div class="col-md-10">
-            <a style="padding-left: 15px" class="btn btn-primary">
-              Accompanying list
-            </a>
-          </div>
-        </div>
-      </td>
+    <tr *ngFor="let contract of contracts ; index as i ">
+      <td>{{i + 1}}</td>
+      <td>{{contract.customerName}}</td>
+      <td>{{contract.startDate}}</td>
+      <td>{{contract.endDate}}</td>
+      <td>{{contract.deposit}}</td>
     </tr>
     </tbody>
   </table>
@@ -45,93 +42,62 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabelContractDetail">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabelContractDetail">Create Contract</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <!--                <input type="text" hidden th:value="${contractId}" id="contractId">-->
-          <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Start Date</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="starDate">
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">End Date </label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="endDate">
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Deposit</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="deposit">
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Total</label>
-            <div class="col-sm-10">
-              <input type="text" disabled class="form-control" id="total">
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Customer Name</label>
-            <div class="col-sm-10">
-              <select class="form-select" aria-label="Default select example" id="customerId">
+          <form [formGroup]="contractForm" (ngSubmit)="submit()" novalidate>
 
+
+            <!--                <input type="text" hidden th:value="${contractId}" id="contractId">-->
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Id</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" formControlName="id">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label"> Customer Name</label>
+              <select class="col-sm-2 col-form-control" formControlName="customerName">
+                <option value="" disabled selected="selected">Please choose</option>
+                <option *ngFor="let customerName of customerList"
+                        [ngValue]="customerName.name">{{customerName.name}}</option>
               </select>
             </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Service</label>
-            <div class="col-sm-10">
-
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label"> Facility Name</label>
+              <select class="col-sm-2 col-form-control" formControlName="faciliyName">
+                <option value="" disabled selected="selected">Please choose</option>
+                <option *ngFor="let facility of facilityList"
+                        [ngValue]="facility.name">{{facility.name}}</option>
+              </select>
             </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Dich vu dinh kem</label>
-            <div class="col-sm-10">
-              <button class="btn btn-primary" onclick="btnAttachFacility()">+</button>
-
-              <table class="table" id="attachFacility">
-                <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Attach Facility Name</th>
-                  <th>Cost</th>
-                  <th>Attach Unit</th>
-                  <th>Attach Status</th>
-                  <th>Quantity</th>
-                </tr>
-                </thead>
-                <!--                <tbody>-->
-                <!--                <tr th:each="item:${attachFacilityS}">-->
-                <!--                  <td th:text="${item.getAttachFacilityId()}"></td>-->
-                <!--                  <td hidden>-->
-                <!--                    <input type="text" th:value="${item.getAttachFacilityId()}" name="attachId">-->
-                <!--                  </td>-->
-                <!--                  <td th:text="${item.getAttachFacilityName()}"></td>-->
-                <!--                  <td th:text="${item.getAttachFacilityCost()}"></td>-->
-                <!--                  <td hidden>-->
-                <!--                    <input type="text" name="facilityCost" th:value="${item.getAttachFacilityCost()}">-->
-                <!--                  </td>-->
-                <!--                  <td th:text="${item.getAttachFacilityUnit()}"></td>-->
-                <!--                  <td th:text="${item.getAttachFacilityStatus()}"></td>-->
-                <!--                  <td>-->
-                <!--                    <input type="number" class="form-control quantity" name="quantity">-->
-                <!--                  </td>-->
-                <!--                </tr>-->
-                <!--                </tbody>-->
-              </table>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Start Date</label>
+              <div class="col-sm-10" formControlName="id">
+                <input type="date" class="form-control" formControlName="startDate">
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="addContractDetail()">Save changes</button>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">End Date</label>
+              <div class="col-sm-10" formControlName="id">
+                <input type="date" class="form-control" formControlName="endDate">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Deposit</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" formControlName="deposit">
+              </div>
+            </div>
+            <div class="mb-3" style="text-align: center">
+<!--              <input value="Create" type="submit" class="btn btn-primary" [disabled]="!contractForm.valid">&nbsp;-->
+              <input value="Create" type="submit" class="btn btn-primary">
+              <button type="button" class="btn btn-primary" [routerLink]="['/contract']">Cancel</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
-<app-footer></app-footer>

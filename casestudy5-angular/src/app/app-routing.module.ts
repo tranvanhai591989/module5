@@ -9,12 +9,14 @@ import {CustomerEditComponent} from './customer/customer-edit/customer-edit.comp
 import {ContractIndexComponent} from './contract/contract-index/contract-index.component';
 import {CustomerIndexComponent} from './customer/customer-index/customer-index.component';
 import {ContractCreateComponent} from './contract/contract-create/contract-create.component';
+import {FacilityDetailComponent} from './facility/facility-detail/facility-detail.component';
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'facility/add', component: FacilityCreateComponent},
+  {path: 'facility/create', component: FacilityCreateComponent},
   {path: 'facility/edit/:id', component: FacilityEditComponent},
+  {path: 'facility/detail/:id', component: FacilityDetailComponent},
   {path: 'facility', component: FacilityIndexComponent},
   {path: 'customer/create', component: CustomerCreateComponent},
   {path: 'customer/edit/:id', component: CustomerEditComponent},

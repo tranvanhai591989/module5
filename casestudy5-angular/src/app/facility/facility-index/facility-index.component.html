@@ -1,220 +1,86 @@
-
-<body>
-<div class="container-fluid" >
-  <div style="text-align: center">
-    <a href="http://localhost:4200/facility/create" class="btn btn-outline-success">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
-        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-      </svg>
-      Create</a>
+<div>
+  <div class="vc_empty_space" style="height: 32px"><span class="vc_empty_space_inner"></span></div>
+  <div class="container-fluid">
+    <div style="text-align: center">
+      <a routerLink="/facility/create" class="btn btn-outline-success">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus"
+             viewBox="0 0 16 16">
+          <path
+            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+          <path fill-rule="evenodd"
+                d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+        </svg>
+        Create</a>
+    </div>
   </div>
-</div>
-<div class="vc_empty_space" style="height: 32px"><span class="vc_empty_space_inner"></span></div>
-<div class="cards" *ngFor="let facility of facilitys ; index as i " >
-  <div class="card">
-    <img
-      src="{{facility.image}}"
-      alt=""
-      class="card-image"
-    />
-    <div class="card-content">
-      <div class="card-top">
-        <!--                            <h3 class="card-title">2020 World Champs Gaming Warzone</h3>-->
-        <div class="card-user">
-          <img
-            src="../assets/image/logo.png"
-            alt=""
-            class="card-user-avatar"
-          />
-          <div class="card-user-info">
-            <div class="card-user-top">
-              <h3 class="card-user-name">{{facility.name| uppercase}} </h3>
-              <i class="bi bi-check2-circle"></i>
+  <div>
+
+    <body>
+    <div class="cards">
+      <div class="card" *ngFor="let facility of facilitys ; index as i ">
+        <img
+          src="{{facility.image}}"
+          alt=""
+          class="card-image"/>
+        <div class="card-content">
+          <div class="card-top">
+            <!--                            <h3 class="card-title">2020 World Champs Gaming Warzone</h3>-->
+            <div class="card-user">
+              <img src="../assets/image/logo.png" alt="" class="card-user-avatar"/>
+              <div class="card-user-info">
+                <div class="card-user-top">
+                  <h3 class="card-user-name">{{facility.name| uppercase}} </h3>
+                  <i class="bi bi-check2-circle"></i>
+                </div>
+                <div class="card-user-game">{{facility.rentalCost| currency:"VND":true}}</div>
+              </div>
             </div>
-            <div class="card-user-game">{{facility.rentalCost| currency:"VND":true}}</div>
+          </div>
+          <div class="card-bottom">
+            <div class="card-live">
+              <a style="color: white" role="button" (click)="openDelete(facility.id,facility.name)"
+                 data-bs-toggle="modal"
+                 data-bs-target="#delete"><i class="bi bi-trash">Delete</i></a>
+            </div>
+            <div class="card-live1">
+              <a style="color: white" role="button" [routerLink]="['/facility/edit',facility.id]">&ensp; <i
+                class="bi bi-pencil-square"></i> Edit</a>
+            </div>
+            <div class="card-live1">
+              <a style="color: white" role="button" [routerLink]="['/facility/detail', facility.id]"><i class="bi bi-eye"></i>Detail</a>
+            </div>
           </div>
         </div>
       </div>
-      <div class="card-bottom">
-        <div class="card-live">
 
-          <a  style="color: white" [routerLink]="['/facility/delete',facility.id]" > <i class="bi bi-trash"></i></a>
-        </div>
-        <div class="card-live1">
 
-          <a  style="color: white"[routerLink]="['/facility/edit',facility.id]">&ensp; <i class="bi bi-pencil-square" ></i> Edit</a>
-        </div>
-        <div class="card-live2">
-
-          <button class="btn btn-outline-warning " style="color: black ; border: white" > <i class="bi bi-eye"></i>&ensp;Detail</button>
+      <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete Facility</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Do you want delete facility :{{name}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                Cancel
+              </button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="delete(id)">Delete</button>
+            </div>
+          </div>
         </div>
       </div>
+
+
+
+
     </div>
+    </body>
   </div>
-<!--  <div class="card">-->
-<!--    <img-->
-<!--      src="../assets/image/hinh1.jpg"-->
-<!--      alt=""-->
-<!--      class="card-image"-->
-<!--    />-->
-<!--    <div class="card-content">-->
-<!--      <div class="card-top">-->
-<!--        &lt;!&ndash;                            <h3 class="card-title">2020 World Champs Gaming Warzone</h3>&ndash;&gt;-->
-<!--        <div class="card-user">-->
-<!--          <img-->
-<!--            src="../assets/image/logo.png"-->
-<!--            alt=""-->
-<!--            class="card-user-avatar"-->
-<!--          />-->
-<!--          <div class="card-user-info">-->
-<!--            <div class="card-user-top">-->
-<!--              <h3 class="card-user-name">VIP-1</h3>-->
-<!--              <i class="bi bi-check2-circle"></i>-->
-<!--            </div>-->
-<!--            <div class="card-user-game">3.000.000</div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="card-bottom">-->
-<!--        <div class="card-live">-->
 
-<!--          <a href="" style="color: white"><i class="bi bi-trash"></i></a>-->
-<!--        </div>-->
-<!--        <div class="card-live1">-->
-
-<!--          <a href="" style="color: white" [routerLink]="['/facility/edit']">&ensp; <i class="bi bi-pencil-square"  ></i> Edit</a>-->
-<!--        </div>-->
-<!--        <div class="card-live2">-->
-
-<!--          <button class="btn btn-outline-warning " style="color: black ; border: white" > <i class="bi bi-eye"></i>&ensp;Detail</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="card">-->
-<!--    <img-->
-<!--      src="../assets/image/hinh1.jpg"-->
-<!--      alt=""-->
-<!--      class="card-image"-->
-<!--    />-->
-<!--    <div class="card-content">-->
-<!--      <div class="card-top">-->
-<!--        &lt;!&ndash;                            <h3 class="card-title">2020 World Champs Gaming Warzone</h3>&ndash;&gt;-->
-<!--        <div class="card-user">-->
-<!--          <img-->
-<!--            src="../assets/image/logo.png"-->
-<!--            alt=""-->
-<!--            class="card-user-avatar"-->
-<!--          />-->
-<!--          <div class="card-user-info">-->
-<!--            <div class="card-user-top">-->
-<!--              <h3 class="card-user-name">VIP-1</h3>-->
-<!--              <i class="bi bi-check2-circle"></i>-->
-<!--            </div>-->
-<!--            <div class="card-user-game">3.000.000</div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="card-bottom">-->
-<!--        <div class="card-live">-->
-
-<!--          <a href="" style="color: white"><i class="bi bi-trash"></i></a>-->
-<!--        </div>-->
-<!--        <div class="card-live1">-->
-
-<!--          <a href="" style="color: white" [routerLink]="['/facility/edit']">&ensp; <i class="bi bi-pencil-square"  ></i> Edit</a>-->
-<!--        </div>-->
-<!--        <div class="card-live2">-->
-
-<!--          <button class="btn btn-outline-warning " style="color: black ; border: white" > <i class="bi bi-eye"></i>&ensp;Detail</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="card">-->
-<!--    <img-->
-<!--      src="../assets/image/hinh1.jpg"-->
-<!--      alt=""-->
-<!--      class="card-image"-->
-<!--    />-->
-<!--    <div class="card-content">-->
-<!--      <div class="card-top">-->
-<!--        &lt;!&ndash;                            <h3 class="card-title">2020 World Champs Gaming Warzone</h3>&ndash;&gt;-->
-<!--        <div class="card-user">-->
-<!--          <img-->
-<!--            src="../assets/image/logo.png"-->
-<!--            alt=""-->
-<!--            class="card-user-avatar"-->
-<!--          />-->
-<!--          <div class="card-user-info">-->
-<!--            <div class="card-user-top">-->
-<!--              <h3 class="card-user-name">VIP-1</h3>-->
-<!--              <i class="bi bi-check2-circle"></i>-->
-<!--            </div>-->
-<!--            <div class="card-user-game">3.000.000</div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="card-bottom">-->
-<!--        <div class="card-live">-->
-
-<!--          <a href="" style="color: white"><i class="bi bi-trash"></i></a>-->
-<!--        </div>-->
-<!--        <div class="card-live1">-->
-
-<!--          <a href="" style="color: white"  [routerLink]="['/facility/edit']">&ensp; <i class="bi bi-pencil-square" ></i> Edit</a>-->
-<!--        </div>-->
-<!--        <div class="card-live2">-->
-
-<!--          <button class="btn btn-outline-warning " style="color: black ; border: white" > <i class="bi bi-eye"></i>&ensp;Detail</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="card">-->
-<!--  <img-->
-<!--    src="../assets/image/hinh1.jpg"-->
-<!--    alt=""-->
-<!--    class="card-image"-->
-<!--  />-->
-<!--  <div class="card-content">-->
-<!--    <div class="card-top">-->
-<!--      &lt;!&ndash;                            <h3 class="card-title">2020 World Champs Gaming Warzone</h3>&ndash;&gt;-->
-<!--      <div class="card-user">-->
-<!--        <img-->
-<!--          src="../assets/image/logo.png"-->
-<!--          alt=""-->
-<!--          class="card-user-avatar"-->
-<!--        />-->
-<!--        <div class="card-user-info">-->
-<!--          <div class="card-user-top">-->
-<!--            <h3 class="card-user-name">VIP-1</h3>-->
-<!--            <i class="bi bi-check2-circle"></i>-->
-<!--          </div>-->
-<!--          <div class="card-user-game">3.000.000</div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="card-bottom">-->
-<!--      <div class="card-live">-->
-
-<!--        <a href="" style="color: white"><i class="bi bi-trash"></i></a>-->
-<!--      </div>-->
-<!--      <div class="card-live1">-->
-
-<!--        <a href="" style="color: white"  [routerLink]="['/facility/edit']" >&ensp; <i class="bi bi-pencil-square"></i> Edit</a>-->
-<!--      </div>-->
-<!--      <div class="card-live2">-->
-
-<!--        <button class="btn btn-outline-warning " style="color: black ; border: white" > <i class="bi bi-eye"></i>&ensp;Detail</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 </div>
 
-</body>
 
-
-<app-footer></app-footer>

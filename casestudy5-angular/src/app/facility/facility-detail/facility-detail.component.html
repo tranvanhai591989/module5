@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <div>
+        <div class="body_center_2 container">
+          <div style="text-align: center">
+            <h3>Facility Detail</h3>
+
+          </div>
+          <form [formGroup]="facilityForm" readonly="facilityForm">
+            <div class="mb-3">
+              <label class="form-label"> Facility Id</label>
+              <input class="form-control" type="number" formControlName="id" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"> Facility Name</label>
+              <input class="form-control" type="text" formControlName="name" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Facility Type</label>
+              <input formControlName="facilityType" class="form-control" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Area</label>
+              <input class="form-control" type="number" formControlName="area" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Cost</label>
+              <input type="number" class="form-control" formControlName="rentalCost" readonly>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Max People</label>
+              <input class="form-control" type="number" formControlName="maxPeople" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Rental type</label>
+
+              <input  formControlName="rentalType" name="v" class="form-control" readonly>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Image</label>
+              <input type="text" class=" form-control" formControlName="image" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Stand Room</label>
+              <input type="text" class=" form-control" formControlName="roomStandard" readonly>
+            </div>
+
+            <div class="mb-3" >
+              <label class="form-label">Description other convenience</label>
+              <input class=" form-control" type="text" formControlName="description" readonly>
+
+            </div>
+
+            <div class="mb-3" id="pool">
+              <label class="form-label">Pool Area</label>
+              <input type="number" class="form-control" formControlName="poolArea" readonly>
+            </div>
+
+            <div class="mb-3" id="floors" >
+              <label class="form-label">Number of Floors</label>
+              <input type="text" class=" form-control" formControlName="numberOfFloors" readonly>
+            </div>
+
+            <div class="mb-3" id="free">
+              <label class="form-label">Free service</label>
+              <input type="text" class=" form-control" formControlName="freeService" readonly>
+            </div>
+            <div style="text-align: center">
+              <input type="button" class="btn btn-outline-primary" value="Close" [routerLink]="['/facility']" >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+</div>
+
+
+

@@ -1,78 +1,107 @@
-<div>
-  <div class="body_center_2 container">
-    <div  style="text-align: center">
-      <h3>Edit Facility</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <div>
+        <div class="body_center_2 container">
+          <div style="text-align: center">
+            <h3>Edit Facility</h3>
 
-    </div>
-    <!--    <form>-->
-    <p></p>
-    <div class="mb-3">
-      <label class="form-label">Facility Type</label>
-      <select class="form-select" name="" id="facilityType">
-        <option value="Room">Room</option>
-        <option value="House">House</option>
-        <option value="Villa">Villa</option>
+          </div>
+          <form [formGroup]="facilityForm" (ngSubmit)="submit()">
+            <div class="mb-3">
+              <label class="form-label"> Facility Id</label>
+              <input class="form-control" type="number" formControlName="id">
+            </div>
 
-      </select>
-    </div>
-    <div class="mb-3">
-      <label class="form-label"> Facility Name</label>
-      <input class="form-control" type="text">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Cost</label>
-      <input type="number" class="form-control">
+            <div class="mb-3">
+              <label class="form-label"> Facility Name</label>
+              <input class="form-control" type="text" formControlName="name">
+            </div>
 
-    </div>
+            <div class="mb-3">
+              <label class="form-label">Facility Type</label>
+              <select formControlName="facilityType" class="form-control"
+                      (change)="changeFacility($event.target.value)">
+                <option value="" >Please choose</option>
+                <option *ngFor="let facilityType of facilityTypes" [value]="facilityType.name">{{facilityType.name}}</option>
+              </select>
+            </div>
 
-    <div class="mb-3">
-      <label class="form-label">Area</label>
-      <input class="form-control" type="number">
-    </div>
+            <div class="mb-3">
+              <label class="form-label">Area</label>
+              <input class="form-control" type="number" formControlName="area">
+            </div>
 
-    <div class="mb-3">
-      <label class="form-label">Max People</label>
-      <input class="form-control" type="number">
-    </div>
+            <div class="mb-3">
+              <label class="form-label">Cost</label>
+              <input type="number" class="form-control" formControlName="rentalCost">
 
-    <div class="mb-3">
-      <label class="form-label">Rent type</label>
-      <select class="form-select">
-        <option value="Date">Date</option>
-        <option value="Month">Month</option>
-        <option value="Year"> Year</option>
-      </select>
+            </div>
 
-    </div>
-    <div class="mb-3" id="standardRoom">
-      <label class="form-label">Stand Room</label>
+            <div class="mb-3">
+              <label class="form-label">Max People</label>
+              <input class="form-control" type="number" formControlName="maxPeople">
+            </div>
 
-      <input type="text" class=" form-control">
-    </div>
+            <div class="mb-3">
+              <label class="form-label">Rental type</label>
 
-    <div class="mb-3" id="other">
-      <label class="form-label">Description other convenience</label>
-      <input class=" form-control" type="text">
+              <select id="customerType" formControlName="rentalType" name="customerType" class="form-control">
+                <option value="" disabled selected="selected">Please choose</option>
+                <option *ngFor="let rentalType of facilityRentalTypes"
+                        [ngValue]="rentalType.name">{{rentalType.name}}</option>
+              </select>
+            </div>
 
-    </div>
+            <div class="mb-3">
+              <label class="form-label">Image</label>
+              <select formControlName="image" class="form-control">
+                <option value="../assets/image/hinh1.jpg">Image 1</option>
+                <option value="../assets/image/hinh2.jpg">Image 2</option>
+                <option value="../assets/image/hinh3.jpg">Image 3</option>
+                <option value="../assets/image/hinh4.jpg">Image 4</option>
+                <option value="../assets/image/hinh 5.jpg">Image 5</option>
+                <option value="../assets/image/hinh6.jpg">Image 6</option>
+                <option value="../assets/image/hinh7.jpg">Image 7</option>
+              </select>
+            </div>
 
-    <div class="mb-3" id="pool">
-      <label class="form-label">Pool Area</label>
-      <input type="text" class="form-control">
-    </div>
+            <div class="mb-3" *ngIf="temp == 'Villa' || temp == 'House'">
+              <label class="form-label">Stand Room</label>
+              <input type="text" class=" form-control" formControlName="roomStandard">
+            </div>
 
-    <div class="mb-3" id="floors">
-      <label class="form-label">Number of Floors</label>
-      <input type="text" class=" form-control">
-    </div>
+            <div class="mb-3" *ngIf="temp == 'Villa' || temp =='House'">
+              <label class="form-label">Description other convenience</label>
+              <input class=" form-control" type="text" formControlName="description">
 
-    <div class="mb-3" id="free">
-      <label class="form-label">Free service</label>
-      <input type="text" class=" form-control">
+            </div>
+
+            <div class="mb-3" id="pool" *ngIf="temp == 'Villa' || temp == 'House'">
+              <label class="form-label">Pool Area</label>
+              <input type="number" class="form-control" formControlName="poolArea">
+            </div>
+
+            <div class="mb-3" id="floors" *ngIf="temp == 'Villa' || temp== 'House'">
+              <label class="form-label">Number of Floors</label>
+              <input type="text" class=" form-control" formControlName="numberOfFloors">
+            </div>
+
+            <div class="mb-3" id="free" *ngIf="temp == 'Villa' || temp == 'House'|| temp == 'Room'">
+              <label class="form-label">Free service</label>
+              <input type="text" class=" form-control" formControlName="freeService">
+            </div>
+            <div style="text-align: center">
+              <input type="submit" class="btn btn-outline-primary" value="Edit">
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <div style="text-align: center">
-      <input type="submit" class="btn btn-outline-primary" value="Edit">
-    </div>
-    <!--    </form>-->
+    <div class="col-3"></div>
   </div>
 </div>
+
+
+

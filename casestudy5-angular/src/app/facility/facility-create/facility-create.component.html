@@ -1,79 +1,140 @@
-<div>
-  <div class="body_center_2 container">
-    <div  style="text-align: center">
-      <h3>Create Facility</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <div>
+        <div class="body_center_2 container">
+          <div style="text-align: center">
+            <h3>Create Facility</h3>
 
+          </div>
+          <form [formGroup]="facilityForm" (ngSubmit)="submit()">
+            <div class="mb-3">
+              <label class="form-label"> Facility Id</label>
+              <input class="form-control" type="number" formControlName="id">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"> Facility Name</label>
+              <input class="form-control" type="text" formControlName="name">
+              <p style="color: red"
+                 *ngIf="facilityForm.controls.name.hasError('required')&&facilityForm.controls.name.touched">
+                Don't blank
+              </p>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Facility Type</label>
+              <select formControlName="facilityType" class="form-control"
+                      (change)="changeFacility($event.target.value)">
+                <option value="" disabled selected="selected">Please choose</option>
+                <option *ngFor="let facilityType of facilityTypes"
+                        [value]="facilityType.name">{{facilityType.name}}</option>
+              </select>
+              <p style="color: red"
+                 *ngIf="facilityForm.controls.facilityType.hasError('pattern')&&facilityForm.controls.facilityType.touched">
+                Don't blank
+              </p>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Area</label>
+              <input class="form-control" type="number" formControlName="area">
+              <p style="color: red"
+                 *ngIf="facilityForm.controls.area.hasError('min')&&facilityForm.controls.area.touched">
+                Don't less than 30m2
+              </p>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Cost</label>
+              <input type="number" class="form-control" formControlName="rentalCost">
+              <p style="color: red"
+                 *ngIf="facilityForm.controls.rentalCost.hasError('min')&&facilityForm.controls.rentalCost.touched">
+                Don't less than 0 Vnd
+              </p>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Max People</label>
+              <input class="form-control" type="number" formControlName="maxPeople">
+              <p style="color: red"
+                 *ngIf="facilityForm.controls.maxPeople.hasError('min')&&facilityForm.controls.maxPeople.touched">
+                Don't less than one People
+              </p>
+              <p style="color: red"
+                 *ngIf="facilityForm.controls.maxPeople.hasError('max')&&facilityForm.controls.maxPeople.touched">
+                Has less than 30 peoples
+              </p>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Rental type</label>
+
+              <select id="customerType" formControlName="rentalType" name="customerType" class="form-control">
+                <option value="" disabled selected="selected">Please choose</option>
+                <option *ngFor="let rentalType of facilityRentalTypes"
+                        [ngValue]="rentalType">{{rentalType.name}}</option>
+                <p style="color: red"
+                   *ngIf="facilityForm.controls.rentalType.hasError('required')&&facilityForm.controls.rentalType.touched">
+                  Don' blank
+                </p>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Image</label>
+              <select formControlName="image" class="form-control">
+                <option value="" disabled selected="selected">Choose Image</option>
+                <option value="../assets/image/hinh1.jpg">Image 1</option>
+                <option value="../assets/image/hinh2.jpg">Image 2</option>
+                <option value="../assets/image/hinh3.jpg">Image 3</option>
+                <option value="../assets/image/hinh4.jpg">Image 4</option>
+                <option value="../assets/image/hinh 5.jpg">Image 5</option>
+                <option value="../assets/image/hinh6.jpg">Image 6</option>
+                <option value="../assets/image/hinh7.jpg">Image 7</option>
+                <p style="color: red"
+                   *ngIf="facilityForm.controls.image.hasError('required')&&facilityForm.controls.image.touched">
+                  Don' blank
+                </p>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Stand Room</label>
+              <input type="text" class=" form-control" formControlName="roomStandard">
+            </div>
+
+            <div class="mb-3" *ngIf="temp === 'Villa' || temp == 'House'">
+              <label class="form-label">Description other convenience</label>
+              <input class=" form-control" type="text" formControlName="description" [defaultValue]=" ">
+
+            </div>
+
+            <div class="mb-3" id="pool" *ngIf="temp == 'Villa'">
+              <label class="form-label">Pool Area</label>
+              <input type="number" class="form-control" formControlName="poolArea" [defaultValue]=" ">
+            </div>
+
+            <div class="mb-3" id="floors" *ngIf="temp == 'Villa' || temp == 'House'">
+              <label class="form-label">Number of Floors</label>
+              <input type="text" class=" form-control" formControlName="numberOfFloors" [defaultValue]=" ">
+            </div>
+
+            <div class="mb-3" id="free" *ngIf="temp == 'Room'">
+              <label class="form-label">Free service</label>
+              <input type="text" class=" form-control" formControlName="freeService" [defaultValue]=" ">
+            </div>
+            <div style="text-align: center">
+              <input type="submit" class="btn btn-outline-primary" value="Create" [disabled]="!facilityForm.valid">
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-<!--    <form>-->
-      <p></p>
-      <div class="mb-3">
-        <label class="form-label">Facility Type</label>
-        <select class="form-select" name="" id="facilityType">
-          <option value="Room">Room</option>
-          <option value="House">House</option>
-          <option value="Villa">Villa</option>
-
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label"> Facility Name</label>
-        <input class="form-control" type="text">
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Cost</label>
-        <input type="number" class="form-control">
-
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Area</label>
-        <input class="form-control" type="number">
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Max People</label>
-        <input class="form-control" type="number">
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Rent type</label>
-        <select class="form-select">
-          <option value="Date">Date</option>
-          <option value="Month">Month</option>
-          <option value="Year"> Year</option>
-        </select>
-
-      </div>
-      <div class="mb-3" id="standardRoom">
-        <label class="form-label">Stand Room</label>
-
-        <input type="text" class=" form-control">
-      </div>
-
-      <div class="mb-3" id="other">
-        <label class="form-label">Description other convenience</label>
-        <input class=" form-control" type="text">
-
-      </div>
-
-      <div class="mb-3" id="pool">
-        <label class="form-label">Pool Area</label>
-        <input type="text" class="form-control">
-      </div>
-
-      <div class="mb-3" id="floors">
-        <label class="form-label">Number of Floors</label>
-        <input type="text" class=" form-control">
-      </div>
-
-      <div class="mb-3" id="free">
-        <label class="form-label">Free service</label>
-        <input type="text" class=" form-control">
-      </div>
-      <div style="text-align: center">
-        <input type="submit" class="btn btn-outline-primary" value="Create">
-      </div>
-<!--    </form>-->
+    <div class="col-3"></div>
   </div>
 </div>
+
+
 

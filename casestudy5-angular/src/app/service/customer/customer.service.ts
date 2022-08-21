@@ -1,47 +1,51 @@
 import {Injectable} from '@angular/core';
 import {Customer} from '../../model/customer';
+import {CustomerType} from '../../model/customer-type';
+import {CustomerTypeService} from './customer-type.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
+  customerTypes: CustomerType[];
 
-  constructor() {
+  constructor(private customerTypeService: CustomerTypeService) {
+    this.customerTypes = this.customerTypeService.getAll();
   }
 
   customers: Customer[] = [
     {
       id: 1,
       name: 'Tran Van Hai',
-      birthday: '1989 / 09 / 05',
+      birthday: '1989-09-05',
       gender: 'Male',
       idCard: 205491912,
-      phone: 707498777,
+      phone: 84707498777,
       email: 'hai@gmail.com',
       address: 'Quang Nam',
-      customerType: 'Gold'
+      customerType: {id: 1, name: 'Gold'}
     },
     {
       id: 2,
-      name: 'Tran Van ',
-      birthday: '1989 / 09 / 05',
+      name: 'Tran Van',
+      birthday: '1989-09-05',
       gender: 'Male',
       idCard: 305496185,
-      phone: 707498774,
+      phone: 84707498774,
       email: 'hai@gmail.com',
       address: 'Quang Nam',
-      customerType: 'Silver'
+      customerType: {id: 2, name: 'Silver'}
     },
     {
-      id: 2,
-      name: 'Tran Van ',
-      birthday: '1989 / 09 / 05',
+      id: 3,
+      name: 'Tran Van',
+      birthday: '1989/09/05',
       gender: 'Male',
       idCard: 485555555,
-      phone: 707498775,
+      phone: 84707498775,
       email: 'hai@gmail.com',
       address: 'Quang Nam',
-      customerType: 'Silver'
+      customerType: {id: 3, name: 'Silver'}
     },
   ];
 
@@ -50,6 +54,7 @@ export class CustomerService {
   }
 
   saveCustomer(customer: Customer) {
+
     this.customers.push(customer);
   }
 
@@ -58,6 +63,11 @@ export class CustomerService {
   }
 
   updateCustomer(id: number, customer: Customer) {
+    for (const item of this.customerTypes) {
+      if (customer.customerType === item.name) {
+        customer.customerType = item;
+      }
+    }
     for (let i = 0; i < this.customers.length; i++) {
       if (this.customers[i].id === id) {
         this.customers[i] = customer;
