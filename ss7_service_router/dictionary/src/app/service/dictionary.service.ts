@@ -9,19 +9,19 @@ export class DictionaryService {
 
   constructor() {
     this.dictionary.push({
-      word: '行く',
+      word: 'go',
       mean: 'đi, di chuyển'
     });
     this.dictionary.push({
-      word: '食べる',
+      word: 'eat',
       mean: 'ăn'
     });
     this.dictionary.push({
-      word: '飲む',
+      word: 'drink',
       mean: 'uống'
     });
     this.dictionary.push({
-      word: '寝る',
+      word: 'sleep',
       mean: 'ngủ'
     });
   }
@@ -35,6 +35,10 @@ export class DictionaryService {
       if (findWord.word === word) {
         return findWord;
       }
+      return {
+        word: 'Not found',
+        mean: 'Khong ton tai'
+      };
     }
   }
 }
