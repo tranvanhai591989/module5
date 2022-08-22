@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ProductService} from 'src/app/service/product.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
-import {Product} from '../../model/product';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-edit',
@@ -15,10 +14,19 @@ export class ProductEditComponent implements OnInit {
   id: number;
 
   constructor(private productService: ProductService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
+  }
+
+  ngOnInit() {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get('id');
-      const product = this.getProduct(this.id);
+      this.getProduct(this.id);
+    });
+  }
+
+  getProduct(id: number) {
+    this.productService.findById(id).subscribe(product => {
       this.productForm = new FormGroup({
         id: new FormControl(product.id),
         name: new FormControl(product.name),
@@ -28,16 +36,12 @@ export class ProductEditComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
-
-  getProduct(id: number) {
-    return this.productService.findById(id);
-  }
-
-  updateProduct(id: number): void {
+  updateProduct(id: number) {
     const product = this.productForm.value;
-    this.productService.updateProduct(id, product);
-    alert('Cập nhật thành công');
+    this.productService.updateProduct(id, product).subscribe(() => {
+      this.productForm.reset();
+      alert(' Create success');
+      this.router.navigateByUrl('/product/list');
+    });
   }
 }

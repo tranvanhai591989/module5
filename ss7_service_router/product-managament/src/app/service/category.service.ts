@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Category} from '../model/category';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class CategoryService {
     name: 'LG',
   }];
 
-  constructor() {
+  constructor(private  http: HttpClient) {
   }
 
   getAll(): Category[] {

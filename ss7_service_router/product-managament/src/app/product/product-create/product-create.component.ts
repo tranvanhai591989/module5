@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ProductService} from '../../service/product.service';
 import {Router} from '@angular/router';
-import {Product} from '../../model/product';
 
 @Component({
   selector: 'app-product-create',
@@ -27,8 +26,10 @@ export class ProductCreateComponent implements OnInit {
 
   submit() {
     const product = this.productForm.value;
-    this.productService.saveProduct(product);
-    this.productForm.reset();
-    this.router.navigate(['/']);
+    this.productService.saveProduct(product).subscribe(() => {
+      this.productForm.reset();
+      alert(' Create success');
+      this.router.navigateByUrl('/product/list');
+    });
   }
 }
