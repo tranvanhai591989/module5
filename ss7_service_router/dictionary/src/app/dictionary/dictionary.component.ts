@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Dictionary} from '../model/dictionary';
 import {DictionaryService} from '../service/dictionary.service';
 
@@ -9,6 +9,7 @@ import {DictionaryService} from '../service/dictionary.service';
 })
 export class DictionaryComponent implements OnInit {
   dictionaries: Dictionary[] = [];
+
   constructor(private dictionaryService: DictionaryService) {
   }
 

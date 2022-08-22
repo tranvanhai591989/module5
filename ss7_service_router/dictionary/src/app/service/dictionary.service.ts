@@ -5,28 +5,28 @@ import {Dictionary} from '../model/dictionary';
   providedIn: 'root'
 })
 export class DictionaryService {
-  dictionary: Dictionary[] = [];
+  dictionary: Dictionary[];
 
-  constructor() {
-    this.dictionary.push({
+  constructor(private dictionaryService: DictionaryService) {
+    this.dictionary = [{
       word: 'go',
       mean: 'đi, di chuyển'
-    });
-    this.dictionary.push({
-      word: 'eat',
-      mean: 'ăn'
-    });
-    this.dictionary.push({
-      word: 'drink',
-      mean: 'uống'
-    });
-    this.dictionary.push({
-      word: 'sleep',
-      mean: 'ngủ'
-    });
+    },
+      {
+        word: 'eat',
+        mean: 'ăn'
+      },
+      {
+        word: 'drink',
+        mean: 'uống'
+      },
+      {
+        word: 'sleep',
+        mean: 'ngủ'
+      }];
   }
 
-  public getAll() {
+  public getAll(): Dictionary[] {
     return this.dictionary;
   }
 
