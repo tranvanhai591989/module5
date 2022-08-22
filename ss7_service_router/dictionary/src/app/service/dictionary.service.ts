@@ -30,7 +30,7 @@ export class DictionaryService {
     return this.dictionary;
   }
 
-  findByWord(word: string) {
+  findByWord(word: string): Dictionary {
     for (const findWord of this.dictionary) {
       if (findWord.word === word) {
         return findWord;
