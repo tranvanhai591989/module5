@@ -23,15 +23,15 @@ export class CategoryService {
     return this.categories;
   }
 
-  saveCategory(category)  {
+  saveCategory(category): void {
     this.categories.push(category);
   }
 
-  findById(id: number) {
+  findById(id: number): Category {
     return this.categories.find(category => category.id === id);
   }
 
-  updateCategory(id: number, category: Category) {
+  updateCategory(id: number, category: Category): void {
     for (let i = 0; i < this.categories.length; i++) {
       if (this.categories[i].id === id) {
         this.categories[i] = category;
