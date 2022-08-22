@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {CategoryListComponent} from './category-list/category-list.component';
 import {CategoryCreateComponent} from './category-create/category-create.component';
 import {CategoryEditComponent} from './category-edit/category-edit.component';
-import {CategoryDeleteComponent} from './category-delete/category-delete.component';
 
 
 const routes: Routes = [
@@ -18,11 +17,7 @@ const routes: Routes = [
   {
     path: 'edit/:id',
     component: CategoryEditComponent
-  },
-  {
-    path: 'delete/:id',
-    component: CategoryDeleteComponent
-  },
+  }
 ];
 
 @NgModule({

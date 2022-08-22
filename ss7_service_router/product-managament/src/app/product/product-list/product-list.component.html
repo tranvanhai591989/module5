@@ -8,7 +8,7 @@
     <td>Mô tả</td>
     <td colspan="2"></td>
   </tr>
-  <tr *ngFor="let product of products; index as i" >
+  <tr *ngFor="let product of products; index as i">
     <td>{{i + 1}}</td>
     <td>{{product.name.name}}</td>
     <td>{{product.price}}</td>
@@ -36,7 +36,7 @@
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
               Cancel
             </button>
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="delete(id)" >Delete</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="delete(id)">Delete</button>
           </div>
         </div>
       </div>

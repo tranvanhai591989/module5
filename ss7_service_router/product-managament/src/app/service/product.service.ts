@@ -28,7 +28,7 @@ export class ProductService {
     return this.http.patch<Product>(this.URL_PRODUCT + '/' + id, product);
   }
 
-  deleteProduct(id: number): Observable<Product>  {
-    return this.http.delete<Product>(this.URL_PRODUCT + '/' + id) ;
+  deleteProduct(id: number): Observable<Product> {
+    return this.http.delete<Product>(this.URL_PRODUCT + '/' + id);
   }
 }

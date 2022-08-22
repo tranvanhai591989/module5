@@ -12,11 +12,20 @@
     {
       "id": 2,
       "name": {
-        "id": 7,
-        "name": "Rog Phone"
+        "id": 3,
+        "name": "LG"
       },
       "price": 123567657,
       "description": "676575767"
+    },
+    {
+      "id": 3,
+      "name": {
+        "id": 2,
+        "name": "Samsung"
+      },
+      "price": 123,
+      "description": "123"
     }
   ],
   "categories": [
