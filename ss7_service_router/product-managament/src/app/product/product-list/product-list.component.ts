@@ -20,8 +20,8 @@ export class ProductListComponent implements OnInit {
     this.getAll();
   }
 
-  getAll() {
-    this.products = this.productService.getAll();
+  getAll(): Product[] {
+     return  this.products = this.productService.getAll();
   }
 
   openDelete(id: number, name: string) {
@@ -29,7 +29,7 @@ export class ProductListComponent implements OnInit {
     this.name = name;
   }
 
-  delete(id: number) {
+  delete(id: number): void {
     this.productService.deleteProduct(id);
     this.products = this.productService.getAll();
   }

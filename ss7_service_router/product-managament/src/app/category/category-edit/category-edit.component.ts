@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {CategoryService} from '../../service/category.service';
+import {Category} from '../../model/category';
 
 @Component({
   selector: 'app-category-edit',
@@ -27,11 +28,11 @@ export class CategoryEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  getCategory(id: number) {
+  getCategory(id: number): Category {
     return this.categoryService.findById(id);
   }
 
-  updateCategory(id: number) {
+  updateCategory(id: number): void {
     const category = this.categoryForm.value;
     this.categoryService.updateCategory(id, category);
     alert('Cập nhật thành công');
