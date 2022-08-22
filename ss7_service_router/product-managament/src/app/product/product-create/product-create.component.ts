@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ProductService} from '../../service/product.service';
 import {Router} from '@angular/router';
+import {CategoryService} from '../../service/category.service';
+import {Category} from '../../model/category';
 
 @Component({
   selector: 'app-product-create',
@@ -9,6 +11,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
+
+  categores: Category[] = [];
 
   productForm: FormGroup = new FormGroup({
     id: new FormControl(),
@@ -18,10 +22,14 @@ export class ProductCreateComponent implements OnInit {
   });
 
   constructor(private productService: ProductService,
+              private categoryService: CategoryService,
               private router: Router) {
   }
 
   ngOnInit() {
+    this.categoryService.getAll().subscribe(next => {
+      this.categores = next;
+    });
   }
 
   submit() {

@@ -8,7 +8,6 @@ import {Observable} from 'rxjs';
 })
 export class ProductService {
   private URL_PRODUCT = 'http://localhost:3000/products';
-  products: Product[] = [];
 
   constructor(private http: HttpClient) {
   }

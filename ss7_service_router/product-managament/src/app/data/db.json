@@ -2,27 +2,63 @@
   "products": [
     {
       "id": 1,
-      "name": "IPhone 12",
-      "price": 2400000,
-      "description": "New"
+      "name": {
+        "id": 2,
+        "name": "Samsung"
+      },
+      "price": 123,
+      "description": "123"
     },
     {
       "id": 2,
-      "name": "IPhone 11",
-      "price": 1560000,
-      "description": "Like new"
+      "name": {
+        "id": 7,
+        "name": "Rog Phone"
+      },
+      "price": 123567657,
+      "description": "676575767"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Iphone"
+    },
+    {
+      "id": 2,
+      "name": "Samsung"
     },
     {
       "id": 3,
-      "name": "IPhone X ",
-      "price": 968000,
-      "description": "97%"
+      "name": "LG"
     },
     {
       "id": 4,
-      "name": "IPhone 8",
-      "price": 7540000,
-      "description": "98%"
+      "name": "Xiaomi"
+    },
+    {
+      "id": 5,
+      "name": "Oppo"
+    },
+    {
+      "id": 7,
+      "name": "Rog Phone"
+    },
+    {
+      "id": 8,
+      "name": "213"
+    },
+    {
+      "id": 9,
+      "name": "FFFF"
+    },
+    {
+      "id": 10,
+      "name": "RRRRR"
+    },
+    {
+      "id": 11,
+      "name": "13213"
     }
   ]
 }
