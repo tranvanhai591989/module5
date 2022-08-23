@@ -10,7 +10,7 @@ import {FacilityService} from '../facility/facility.service';
 })
 export class ContractService {
   customerList: Customer[] = [];
-  contracts: Contract [];
+  contracts: Contract [] = [];
   facilityList: Facility [] = [];
 
   constructor(private customerService: CustomerService,
@@ -19,7 +19,7 @@ export class ContractService {
     this.facilityList = this.facilityService.getAll();
   }
 
-  getAll() {
+  getAll(): Contract[] {
     return this.contracts;
   }
 
@@ -27,7 +27,7 @@ export class ContractService {
     this.contracts.push(contract);
   }
 
-  updateContract(id: number, contract: Contract) {
+  updateContract(id: number, contract: Contract): void {
     for (const item of this.customerList) {
       if (contract.customerName === item.name) {
         contract.customerName = item;

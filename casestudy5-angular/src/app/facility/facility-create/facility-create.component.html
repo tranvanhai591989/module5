@@ -105,7 +105,7 @@
               <input type="text" class=" form-control" formControlName="roomStandard">
             </div>
 
-            <div class="mb-3" *ngIf="temp === 'Villa' || temp == 'House'">
+            <div class="mb-3" *ngIf="temp == 'Villa' || temp == 'House'">
               <label class="form-label">Description other convenience</label>
               <input class=" form-control" type="text" formControlName="description" [defaultValue]=" ">
 

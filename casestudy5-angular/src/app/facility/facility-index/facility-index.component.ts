@@ -17,6 +17,7 @@ export class FacilityIndexComponent implements OnInit {
   facilityRentalTypes: FacilityRentalType[] = [];
   id: number;
   name: string;
+  p = 1;
 
   constructor(private facilityService: FacilityService,
               private facilityTypeService: FacilityTypeService,

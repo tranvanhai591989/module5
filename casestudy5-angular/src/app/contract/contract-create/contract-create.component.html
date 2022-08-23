@@ -1,1 +1,60 @@
-<p>contract-create works!</p>
+<div class="container">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <h1>Create Contract</h1>
+    <form [formGroup]="contractForm" (ngSubmit)="submit()" novalidate>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Id</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" formControlName="id">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label"> Customer Name</label>
+        <div class="col-sm-10">
+          <select class="form-control" formControlName="customerName">
+            <option value="" selected disabled >Please choose</option>
+            <option *ngFor="let customerName of customerList" [ngValue]="customerName">{{customerName.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label"> Facility Name</label>
+        <div class="col-sm-10">
+          <select class="form-control" formControlName="facilityName">
+            <option value="" disabled selected="selected">Please choose</option>
+            <option *ngFor="let facility of facilityList"
+                    [ngValue]="facility">{{facility.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Start Date</label>
+        <div class="col-sm-10" formControlName="id">
+          <input type="date" class="form-control" formControlName="startDate">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">End Date</label>
+        <div class="col-sm-10" formControlName="id">
+          <input type="date" class="form-control" formControlName="endDate">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Deposit</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" formControlName="deposit">
+        </div>
+      </div>
+      <div class="mb-3" style="text-align: center">
+        <input value="Create" type="submit" class="btn btn-primary" [disabled]="!contractForm.valid">&nbsp;
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [routerLink]="['/contract']">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="col-2"></div>
+
+</div>
+

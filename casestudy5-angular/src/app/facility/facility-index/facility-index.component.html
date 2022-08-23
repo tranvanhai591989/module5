@@ -17,7 +17,7 @@
 
     <body>
     <div class="cards">
-      <div class="card" *ngFor="let facility of facilitys ; index as i ">
+      <div class="card" *ngFor="let facility of facilitys | paginate:{itemsPerPage: 4, currentPage: p}; index as i ">
         <img
           src="{{facility.image}}"
           alt=""
@@ -79,6 +79,9 @@
 
     </div>
     </body>
+    <div class="container navigation" style="display: flex;justify-content: center;margin-top: 10px">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
   </div>
 
 </div>

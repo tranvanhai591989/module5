@@ -69,9 +69,9 @@
           <div class="mb-3">
             <label class="form-label"> Type</label>
             <select  class="form-control" formControlName="customerType" >
-              <option value="" disabled selected="selected">Please choose</option>
+<!--              <option value="" disabled selected="selected">Please choose</option>-->
               <option *ngFor="let customerType of customerTypes"
-                      [ngValue]="customerType.name">{{customerType.name}}</option>
+                      [ngValue]="customerType">{{customerType.name}}</option>
             </select>
           </div>
           <div class="mb-3" style="text-align: center">

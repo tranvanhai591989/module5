@@ -6,6 +6,7 @@ import {FacilityService} from '../../service/facility/facility.service';
 import {Router} from '@angular/router';
 import {FacilityTypeService} from '../../service/facility/facility-type.service';
 import {FacilityType} from '../../model/facilityType';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-facility-create',
@@ -35,6 +36,7 @@ export class FacilityCreateComponent implements OnInit {
   constructor(private facilityRentalTypeService: FacilityRentTypeService,
               private facilityService: FacilityService,
               private facilityTypeService: FacilityTypeService,
+              private toastr: ToastrService,
               private router: Router) {
   }
 
@@ -49,6 +51,9 @@ export class FacilityCreateComponent implements OnInit {
     this.facilityService.saveFacility(facility);
     this.facilityForm.reset();
     this.router.navigate(['/facility']);
+    this.toastr.success('Create success', ' ', {
+      timeOut: 1500, progressBar: false
+    });
   }
 
   changeFacility(value: any) {

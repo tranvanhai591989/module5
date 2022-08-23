@@ -15,6 +15,7 @@ export class CustomerIndexComponent implements OnInit {
   customerTypes: CustomerType[] = [];
   id: number;
   name: string;
+  p = 1;
 
   constructor(private customerService: CustomerService,
               private customerTypeService: CustomerTypeService,

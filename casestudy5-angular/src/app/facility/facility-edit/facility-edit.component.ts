@@ -6,6 +6,7 @@ import {FacilityService} from '../../service/facility/facility.service';
 import {FacilityTypeService} from '../../service/facility/facility-type.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-facility-edit',
@@ -23,6 +24,7 @@ export class FacilityEditComponent implements OnInit {
               private facilityService: FacilityService,
               private facilityTypeService: FacilityTypeService,
               private activeRouter: ActivatedRoute,
+              private toastr: ToastrService,
               private router: Router) {
     this.activeRouter.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get('id');
@@ -33,7 +35,7 @@ export class FacilityEditComponent implements OnInit {
         facilityType: new FormControl(facility.facilityType.name, [Validators.required]),
         area: new FormControl(facility.area, [Validators.required]),
         rentalCost: new FormControl(facility.rentalCost, [Validators.required, Validators.min(30000)]),
-        maxPeople: new FormControl(facility.maxPeople, [Validators.required, Validators.min(1), , Validators.max(20)]),
+        maxPeople: new FormControl(facility.maxPeople, [Validators.required, Validators.min(1),  Validators.max(20)]),
         rentalType: new FormControl(facility.rentalType.name, [Validators.required]),
         image: new FormControl(facility.image, [Validators.required]),
         roomStandard: new FormControl(facility.roomStandard, [Validators.required]),
@@ -55,6 +57,9 @@ export class FacilityEditComponent implements OnInit {
     this.facilityService.updateFacility(this.id, facility);
     this.facilityForm.reset();
     this.router.navigate(['facility']);
+    this.toastr.success('Edit success', ' ', {
+      timeOut: 1500, progressBar: false
+    });
   }
 
   private getFacility(id: number) {

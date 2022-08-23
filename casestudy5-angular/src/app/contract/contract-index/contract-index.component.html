@@ -2,8 +2,7 @@
   <div class="vc_empty_space" style="height: 32px"><span class="vc_empty_space_inner"></span></div>
   <div class="container-fluid">
     <div style="text-align: center">
-      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalContractDetail"
-              class="btn btn-outline-success">
+      <button type="button" routerLink="/contract/create" class="btn btn-outline-success">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus"
              viewBox="0 0 16 16">
           <path
@@ -29,79 +28,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let contract of contracts ; index as i ">
-      <td>{{i + 1}}</td>
-      <td>{{contract.customerName}}</td>
+    <tr *ngFor="let contract of contracts | paginate:{itemsPerPage: 4, currentPage: p}; index as i ">
+      <td>{{(i + 1) + 4 * (p  - 1)}}</td>
+      <td>{{contract.customerName.name}}</td>
+      <td>{{contract.facilityName.name}}</td>
       <td>{{contract.startDate}}</td>
       <td>{{contract.endDate}}</td>
       <td>{{contract.deposit}}</td>
     </tr>
     </tbody>
   </table>
-  <div class="modal fade" id="exampleModalContractDetail" tabindex="-1" aria-labelledby="exampleModalLabel"
-       aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabelContractDetail">Create Contract</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="contractForm" (ngSubmit)="submit()" novalidate>
-
-
-            <!--                <input type="text" hidden th:value="${contractId}" id="contractId">-->
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label">Id</label>
-              <div class="col-sm-10">
-                <input type="number" class="form-control" formControlName="id">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label"> Customer Name</label>
-              <div class="col-sm-10">
-                <select class="form-control" formControlName="customerName">
-                  <option value="" disabled selected="selected">Please choose</option>
-                  <option *ngFor="let customerName of customerList"
-                          [ngValue]="customerName.name">{{customerName.name}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label"> Facility Name</label>
-              <div class="col-sm-10">
-                <select class="form-control" formControlName="faciliyName">
-                  <option value="" disabled selected="selected">Please choose</option>
-                  <option *ngFor="let facility of facilityList"
-                          [ngValue]="facility.name">{{facility.name}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label">Start Date</label>
-              <div class="col-sm-10" formControlName="id">
-                <input type="date" class="form-control" formControlName="startDate">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label">End Date</label>
-              <div class="col-sm-10" formControlName="id">
-                <input type="date" class="form-control" formControlName="endDate">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label">Deposit</label>
-              <div class="col-sm-10">
-                <input type="number" class="form-control" formControlName="deposit">
-              </div>
-            </div>
-            <div class="mb-3" style="text-align: center">
-              <input value="Create" type="button" class="btn btn-primary" [disabled]="!contractForm.valid">&nbsp;
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [routerLink]="['/contract']">Cancel</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+  <div class="container navigation" style="display: flex;justify-content: center;margin-top: 10px">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>

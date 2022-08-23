@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customer} from '../../model/customer';
 import {CustomerService} from '../../service/customer/customer.service';
 import {Router} from '@angular/router';
@@ -17,14 +16,7 @@ export class ContractIndexComponent implements OnInit {
   contracts: Contract [] = [];
   customerList: Customer[] = [];
   facilityList: Facility [] = [];
-  contractForm: FormGroup = new FormGroup({
-    id: new FormControl('', [Validators.required]),
-    customerName: new FormControl('', [Validators.required]),
-    facilityName: new FormControl('', [Validators.required]),
-    startDate: new FormControl('', [Validators.required]),
-    endDate: new FormControl('', [Validators.required]),
-    deposit: new FormControl('', [Validators.required]),
-  });
+  p = 1;
 
   constructor(private customerService: CustomerService,
               private contractService: ContractService,
@@ -37,12 +29,4 @@ export class ContractIndexComponent implements OnInit {
     this.contracts = this.contractService.getAll();
     this.facilityList = this.facilityService.getAll();
   }
-
-  submit() {
-    const contract = this.contractForm.value;
-    this.contractService.saveContract(contract);
-    this.contractForm.reset();
-    this.router.navigate(['/contract']);
-  }
-
 }

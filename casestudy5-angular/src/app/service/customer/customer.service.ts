@@ -8,47 +8,46 @@ import {CustomerTypeService} from './customer-type.service';
 })
 export class CustomerService {
   customerTypes: CustomerType[];
+  customers: Customer[] = [];
 
   constructor(private customerTypeService: CustomerTypeService) {
     this.customerTypes = this.customerTypeService.getAll();
+    this.customers = [
+      {
+        id: 1,
+        name: 'Tran Van Hai',
+        birthday: '1989-09-05',
+        gender: 'Male',
+        idCard: 205491912,
+        phone: 84707498777,
+        email: 'hai@gmail.com',
+        address: 'Quang Nam',
+        customerType: this.customerTypes[2]
+      },
+      {
+        id: 2,
+        name: 'Tran Van',
+        birthday: '1989-09-05',
+        gender: 'Male',
+        idCard: 305496185,
+        phone: 84707498774,
+        email: 'hai@gmail.com',
+        address: 'Quang Nam',
+        customerType: this.customerTypes[1]
+      },
+      {
+        id: 3,
+        name: 'Tran Van',
+        birthday: '1989/09/05',
+        gender: 'Male',
+        idCard: 485555555,
+        phone: 84707498775,
+        email: 'hai@gmail.com',
+        address: 'Quang Nam',
+        customerType: this.customerTypes[1]
+      },
+    ];
   }
-
-  customers: Customer[] = [
-    {
-      id: 1,
-      name: 'Tran Van Hai',
-      birthday: '1989-09-05',
-      gender: 'Male',
-      idCard: 205491912,
-      phone: 84707498777,
-      email: 'hai@gmail.com',
-      address: 'Quang Nam',
-      customerType: {id: 1, name: 'Gold'}
-    },
-    {
-      id: 2,
-      name: 'Tran Van',
-      birthday: '1989-09-05',
-      gender: 'Male',
-      idCard: 305496185,
-      phone: 84707498774,
-      email: 'hai@gmail.com',
-      address: 'Quang Nam',
-      customerType: {id: 2, name: 'Silver'}
-    },
-    {
-      id: 3,
-      name: 'Tran Van',
-      birthday: '1989/09/05',
-      gender: 'Male',
-      idCard: 485555555,
-      phone: 84707498775,
-      email: 'hai@gmail.com',
-      address: 'Quang Nam',
-      customerType: {id: 3, name: 'Silver'}
-    },
-  ];
-
   getAll() {
     return this.customers;
   }

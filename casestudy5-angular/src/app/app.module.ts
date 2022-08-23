@@ -19,6 +19,12 @@ import {ContractCreateComponent} from './contract/contract-create/contract-creat
 import {CustomerTypeComponent} from './customer/customer-type/customer-type.component';
 import {FacilityDetailComponent} from './facility/facility-detail/facility-detail.component';
 import {HttpClientModule} from '@angular/common/http';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CustomerModule} from './customer/customer.module';
+import {ContractModule} from './contract/contract.module';
+import {FacilityModule} from './facility/facility.module';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -29,23 +35,22 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
-    HomeComponent,
-    CustomerCreateComponent,
-    CustomerIndexComponent,
-    CustomerEditComponent,
-    FacilityCreateComponent,
-    FacilityIndexComponent,
-    ContractIndexComponent,
-    FacilityEditComponent,
-    FooterComponent,
-    ContractCreateComponent,
-    CustomerTypeComponent,
-    FacilityDetailComponent,
+    FooterComponent
   ],
   imports: [RouterModule.forRoot(routes),
     BrowserModule, ReactiveFormsModule, HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    CustomerModule,
+    ContractModule,
+    FacilityModule,
+    NgxPaginationModule,
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
