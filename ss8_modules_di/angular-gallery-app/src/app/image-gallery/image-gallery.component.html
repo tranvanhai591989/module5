@@ -1,0 +1,9 @@
+<div class="gallery-container">
+  <div class="gallery-item" *ngFor="let img of listImage| paginate:{itemsPerPage: 1, currentPage: p}"
+       [style.max-width.%]="itemWidth" [style.flex-basis.%]="itemWidth">
+    <app-image-card [src]="img"></app-image-card>
+    <div class="container navigation" style="display: flex;justify-content: center;margin-top: 10px">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
