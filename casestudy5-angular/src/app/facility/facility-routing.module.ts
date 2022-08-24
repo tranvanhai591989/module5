@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {FacilityIndexComponent} from './facility-index/facility-index.component';
 import {FacilityCreateComponent} from './facility-create/facility-create.component';
+import {FacilityEditComponent} from './facility-edit/facility-edit.component';
+import {FacilityDetailComponent} from './facility-detail/facility-detail.component';
 
 
 const routes: Routes = [
@@ -15,7 +17,11 @@ const routes: Routes = [
   },
   {
     path: 'edit/:id',
-    component: FacilityIndexComponent
+    component: FacilityEditComponent
+  },
+  {
+    path: 'detail/:id',
+    component: FacilityDetailComponent
   }
 ];
 

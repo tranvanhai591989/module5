@@ -1,98 +1,63 @@
 import {Injectable} from '@angular/core';
 import {Facility} from '../../model/facility';
-import {FacilityTypeService} from './facility-type.service';
-import {FacilityType} from '../../model/facilityType';
-import {FacilityRentTypeService} from './FacilityRentType.service';
-import {FacilityRentalType} from '../../model/facilityRentalType';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FacilityService {
-  facilityTypes: FacilityType[];
-  facilityRentalTypes: FacilityRentalType[];
+  private URL_FACILITY = 'http://localhost:3000/facilities';
 
-  constructor(private facilityTypeService: FacilityTypeService,
-              private facilityRentTypeService: FacilityRentTypeService) {
-    this.facilityTypes = this.facilityTypeService.getAll();
-    this.facilityRentalTypes = this.facilityRentTypeService.getAll();
+  constructor(private http: HttpClient) {
   }
 
-  facilityList: Facility[] = [
-    {
-      id: 1,
-      name: 'Superior Double Or Twin Room With Garden View',
-      facilityType: {id: 1, name: 'Room'},
-      area: 43.5,
-      rentalCost: 8000000,
-      maxPeople: 8,
-      rentalType: {id: 4, name: 'Year'},
-      image: '../assets/image/hinh1.jpg',
-      roomStandard: '1Dk',
-      poolArea: 23,
-      numberOfFloors: 3,
-      description: 'Kem bia',
-      freeService: 'Thue Xe Dap',
-    }
-  ];
-
-  getAll() {
-    return this.facilityList;
+  getAll(): Observable<Facility[]> {
+    return this.http.get<Facility[]>(this.URL_FACILITY);
   }
 
-  saveFacility(facility: Facility) {
-    for (const item of this.facilityTypes) {
-      if (facility.facilityType === item.name) {
-        facility.facilityType = item;
-      }
-    }
-    for (const item of this.facilityRentalTypes) {
-      if (facility.rentalType === item.name) {
-        facility.rentalType = item;
-      }
-    }
-    this.facilityList.push(facility);
+  saveFacility(facility: Facility): Observable<Facility> {
+    return this.http.post<Facility>(this.URL_FACILITY, facility);
   }
 
-  findById(id: number) {
-    return this.facilityList.find(facility => facility.id === id);
+  findById(id: number): Observable<Facility> {
+    return this.http.get<Facility>(this.URL_FACILITY + '/' + id);
   }
 
-  updateFacility(id: number, facility: Facility) {
-    if (facility.facilityType === 'Villa') {
-      facility.freeService = '';
-    } else if (facility.facilityType === 'House') {
-      facility.freeService = '';
-    } else if (facility.facilityType === 'Room') {
-      facility.description = '';
-      facility.freeService = '';
-      facility.numberOfFloors = null;
-      facility.poolArea = null;
-    }
-
-    for (const item of this.facilityTypes) {
-      if (facility.facilityType === item.name) {
-        facility.facilityType = item;
-      }
-    }
-    for (const item of this.facilityRentalTypes) {
-      if (facility.rentalType === item.name) {
-        facility.rentalType = item;
-      }
-
-      for (let i = 0; i < this.facilityList.length; i++) {
-        if (this.facilityList[i].id === id) {
-          this.facilityList[i] = facility;
-        }
-      }
-    }
+  updateFacility(id: number, facility: Facility): Observable<Facility> {
+    return this.http.patch<Facility>(this.URL_FACILITY + '/' + id, facility);
+    // if (facility.facilityType === 'Villa') {
+    //   facility.freeService = '';
+    // } else if (facility.facilityType === 'House') {
+    //   facility.freeService = '';
+    // } else if (facility.facilityType === 'Room') {
+    //   facility.description = '';
+    //   facility.freeService = '';
+    //   facility.numberOfFloors = null;
+    //   facility.poolArea = null;
+    // }
+    //
+    // for (const item of this.facilityTypes) {
+    //   if (facility.facilityType === item.name) {
+    //     facility.facilityType = item;
+    //   }
+    // }
+    // for (const item of this.facilityRentalTypes) {
+    //   if (facility.rentalType === item.name) {
+    //     facility.rentalType = item;
+    //   }
+    //
+    //   for (let i = 0; i < this.facilityList.length; i++) {
+    //     if (this.facilityList[i].id === id) {
+    //       this.facilityList[i] = facility;
+    //     }
+    //   }
+    // }
 
   }
 
-  deleteFacility(id: number) {
-    this.facilityList = this.facilityList.filter(facility => {
-      return facility.id !== id;
-    });
+  deleteFacility(id: number): Observable<Facility> {
+    return this.http.delete<Facility>(this.URL_FACILITY + '/' + id);
   }
 
 }

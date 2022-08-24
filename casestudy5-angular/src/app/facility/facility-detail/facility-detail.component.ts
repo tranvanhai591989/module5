@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FacilityRentalType} from '../../model/facilityRentalType';
 import {FacilityType} from '../../model/facilityType';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {FacilityRentTypeService} from '../../service/facility/FacilityRentType.service';
+import {FormControl, FormGroup} from '@angular/forms';
 import {FacilityService} from '../../service/facility/facility.service';
 import {FacilityTypeService} from '../../service/facility/facility-type.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {FacilityRentalTypeService} from '../../service/facility/FacilityRentalType.service';
 
 @Component({
   selector: 'app-facility-detail',
@@ -14,20 +15,36 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 })
 export class FacilityDetailComponent implements OnInit {
 
+
+  constructor(private facilityRentalTypeService: FacilityRentalTypeService,
+              private facilityService: FacilityService,
+              private facilityTypeService: FacilityTypeService,
+              private activeRouter: ActivatedRoute,
+              private toastr: ToastrService,
+              private router: Router) {
+  }
+
   facilityRentalTypes: FacilityRentalType[] = [];
   facilityTypes: FacilityType[] = [];
   id: number;
   temp: string;
   facilityForm: FormGroup;
 
-  constructor(private facilityRentalTypeService: FacilityRentTypeService,
-              private facilityService: FacilityService,
-              private facilityTypeService: FacilityTypeService,
-              private activeRouter: ActivatedRoute,
-              private router: Router) {
-    this.activeRouter.paramMap.subscribe((paramMap: ParamMap) => {
-      this.id = +paramMap.get('id');
-      const facility = this.getFacility(this.id);
+  ngOnInit(): void {
+    this.facilityTypeService.getAll().subscribe(next => {
+      this.facilityTypes = next;
+    });
+    this.facilityRentalTypeService.getAll().subscribe(next => {
+      this.facilityRentalTypes = next;
+    });
+    this.activeRouter.paramMap.subscribe((paraMap: ParamMap) => {
+      this.id = +paraMap.get('id');
+      this.getFacility(this.id);
+    });
+  }
+
+  private getFacility(id: number) {
+    this.facilityService.findById(id).subscribe(facility => {
       this.facilityForm = new FormGroup({
         id: new FormControl(facility.id),
         name: new FormControl(facility.name),
@@ -46,11 +63,8 @@ export class FacilityDetailComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.facilityTypes = this.facilityTypeService.getAll();
-    this.facilityRentalTypes = this.facilityRentalTypeService.getAll();
+  changeFacility(target: any) {
+    this.temp = target.value;
   }
-  private getFacility(id: number) {
-    return this.facilityService.findById(id);
-  }
+
 }

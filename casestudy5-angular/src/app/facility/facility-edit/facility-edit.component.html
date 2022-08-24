@@ -9,10 +9,6 @@
 
           </div>
           <form [formGroup]="facilityForm" (ngSubmit)="submit()">
-            <div class="mb-3">
-              <label class="form-label"> Facility Id</label>
-              <input class="form-control" type="number" formControlName="id">
-            </div>
 
             <div class="mb-3">
               <label class="form-label"> Facility Name</label>
@@ -22,7 +18,7 @@
             <div class="mb-3">
               <label class="form-label">Facility Type</label>
               <select formControlName="facilityType" class="form-control"
-                      (change)="changeFacility($event.target.value)">
+                      (change)="changeFacility($event.target)">
                 <option value="" >Please choose</option>
                 <option *ngFor="let facilityType of facilityTypes" [value]="facilityType.name">{{facilityType.name}}</option>
               </select>

@@ -18,13 +18,16 @@ export class CustomerIndexComponent implements OnInit {
   p = 1;
 
   constructor(private customerService: CustomerService,
-              private customerTypeService: CustomerTypeService,
-              private serverHttp: ServerHttpService) {
+              private customerTypeService: CustomerTypeService) {
   }
 
   ngOnInit(): void {
-    this.customers = this.customerService.getAll();
-    this.customerTypes = this.customerTypeService.getAll();
+    this.customerTypeService.getAll().subscribe(next => {
+      this.customerTypes = next;
+    });
+    this.customerService.getAll().subscribe(next => {
+      this.customers = next;
+    });
   }
 
   openDelete(id: number, name: string) {
@@ -33,7 +36,8 @@ export class CustomerIndexComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.customerService.deleteCustomer(id);
-    this.customers = this.customerService.getAll();
+    this.customerService.deleteCustomer(id).subscribe(next => {
+      this.ngOnInit();
+    });
   }
 }

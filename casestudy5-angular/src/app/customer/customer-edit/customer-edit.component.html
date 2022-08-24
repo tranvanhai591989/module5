@@ -7,11 +7,8 @@
 
       <div class="body_center-2 container">
         <div class="vc_empty_space" style="height: 32px"><span class="vc_empty_space_inner"></span></div>
-        <form [formGroup]="customerForm" (ngSubmit)="submit()" novalidate>
-          <div class="mb-3">
-            <label class="form-label">Id</label>
-            <input class="form-control" type="number" formControlName="id">
-          </div>
+        <form [formGroup]="customerForm" (ngSubmit)="submit(id)">
+
 
           <div class="mb-3">
             <label class="form-label">Name</label>
@@ -68,10 +65,9 @@
           </div>
           <div class="mb-3">
             <label class="form-label"> Type</label>
-            <select  class="form-control" formControlName="customerType" >
-<!--              <option value="" disabled selected="selected">Please choose</option>-->
+            <select   class="form-control" formControlName="customerType" >
               <option *ngFor="let customerType of customerTypes"
-                      [ngValue]="customerType">{{customerType.name}}</option>
+                      [value]="customerType.id">{{customerType.name}}</option>
             </select>
           </div>
           <div class="mb-3" style="text-align: center">

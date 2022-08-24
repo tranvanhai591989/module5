@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Contract} from '../../model/contract';
 import {Customer} from '../../model/customer';
 import {Facility} from '../../model/facility';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -14,7 +13,6 @@ import {Router} from '@angular/router';
   styleUrls: ['./contract-create.component.css']
 })
 export class ContractCreateComponent implements OnInit {
-  contracts: Contract [] = [];
   customerList: Customer[] = [];
   facilityList: Facility [] = [];
 
@@ -34,16 +32,19 @@ export class ContractCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.customerList = this.customerService.getAll();
-    this.contracts = this.contractService.getAll();
-    this.facilityList = this.facilityService.getAll();
+    this.customerService.getAll().subscribe(next => {
+      this.customerList = next;
+    });
+    this.facilityService.getAll().subscribe(next => {
+      this.facilityList = next;
+    });
   }
 
   submit() {
     const contract = this.contractForm.value;
-    this.contractService.saveContract(contract);
-    this.contractForm.reset();
-    this.ngOnInit();
-    this.router.navigate(['/contract']);
+    this.contractService.saveContract(contract).subscribe(() => {
+      this.contractForm.reset();
+      this.router.navigate(['/contract']);
+    });
   }
 }

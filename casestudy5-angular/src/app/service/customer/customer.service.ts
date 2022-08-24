@@ -2,80 +2,37 @@ import {Injectable} from '@angular/core';
 import {Customer} from '../../model/customer';
 import {CustomerType} from '../../model/customer-type';
 import {CustomerTypeService} from './customer-type.service';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  customerTypes: CustomerType[];
-  customers: Customer[] = [];
+  private URL_CUSTOMER = 'http://localhost:3000/customers';
 
-  constructor(private customerTypeService: CustomerTypeService) {
-    this.customerTypes = this.customerTypeService.getAll();
-    this.customers = [
-      {
-        id: 1,
-        name: 'Tran Van Hai',
-        birthday: '1989-09-05',
-        gender: 'Male',
-        idCard: 205491912,
-        phone: 84707498777,
-        email: 'hai@gmail.com',
-        address: 'Quang Nam',
-        customerType: this.customerTypes[2]
-      },
-      {
-        id: 2,
-        name: 'Tran Van',
-        birthday: '1989-09-05',
-        gender: 'Male',
-        idCard: 305496185,
-        phone: 84707498774,
-        email: 'hai@gmail.com',
-        address: 'Quang Nam',
-        customerType: this.customerTypes[1]
-      },
-      {
-        id: 3,
-        name: 'Tran Van',
-        birthday: '1989/09/05',
-        gender: 'Male',
-        idCard: 485555555,
-        phone: 84707498775,
-        email: 'hai@gmail.com',
-        address: 'Quang Nam',
-        customerType: this.customerTypes[1]
-      },
-    ];
-  }
-  getAll() {
-    return this.customers;
+  constructor(private customerTypeService: CustomerTypeService,
+              private http: HttpClient) {
   }
 
-  saveCustomer(customer: Customer) {
-    this.customers.push(customer);
+  getAll(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(this.URL_CUSTOMER);
   }
 
-  findById(id: number) {
-    return this.customers.find(customer => customer.id === id);
+  saveCustomer(customer: Customer): Observable<Customer> {
+    return this.http.post<Customer>(this.URL_CUSTOMER, customer);
   }
 
-  updateCustomer(id: number, customer: Customer) {
-    for (const item of this.customerTypes) {
-      if (customer.customerType.name === item.name) {
-        customer.customerType = item;
-      }
-    }
-    for (let i = 0; i < this.customers.length; i++) {
-      if (this.customers[i].id === id) {
-        this.customers[i] = customer;
-      }
-    }
+  findById(id: number): Observable<Customer> {
+    return this.http.get<Customer>(this.URL_CUSTOMER + '/' + id);
   }
 
-  deleteCustomer(id: number) {
-    this.customers = this.customers.filter(customer => {
-      return customer.id !== id;
-    });
+  updateCustomer(id: number, customer): Observable<Customer> {
+    return this.http.patch<Customer>(this.URL_CUSTOMER + '/' + id, customer);
+  }
+
+  deleteCustomer(id: number): Observable<Customer> {
+    return this.http.delete<Customer>(this.URL_CUSTOMER + '/' + id);
+
   }
 }

@@ -1,5 +1,153 @@
 {
-  "customers": [],
-  "facilitys": [],
-  "contracts": []
+  "customers": [
+    {
+      "id": 1,
+      "name": "Hai Hai",
+      "birthday": "1989-09-05",
+      "gender": "Male",
+      "idCard": "205491912",
+      "phone": "84707498777",
+      "email": "ha@gmail.com",
+      "address": "Da Da",
+      "customerType": {
+        "id": 2,
+        "name": "Silver"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Hai Ha Ha",
+      "birthday": "1989-09-05",
+      "gender": "Male",
+      "idCard": "205491912",
+      "phone": "84707777777",
+      "email": "hai@gmail.com",
+      "address": "Quang Nam",
+      "customerType": {
+        "id": 1,
+        "name": "Member"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Ha Ha",
+      "birthday": "1989-08-18",
+      "gender": "Male",
+      "idCard": "205491912",
+      "phone": "84707498777",
+      "email": "hai@gmail.com",
+      "address": "Quang Nam",
+      "customerType": {
+        "id": 4,
+        "name": "Diamond"
+      }
+    }
+  ],
+  "facilities": [
+    {
+      "id": 1,
+      "name": "Ha Ha",
+      "facilityType": "Room",
+      "area": 123,
+      "rentalCost": 12,
+      "maxPeople": 12,
+      "rentalType": {
+        "id": 1,
+        "name": "Day"
+      },
+      "image": "../assets/image/hinh2.jpg",
+      "roomStandard": "asdads",
+      "poolArea": "",
+      "numberOfFloors": "",
+      "description": "",
+      "freeService": "adsasdasd"
+    },
+    {
+      "id": 2,
+      "name": "Hahdsadadasd",
+      "facilityType": "Villa",
+      "area": 123,
+      "rentalCost": 13123,
+      "maxPeople": 12,
+      "rentalType": {
+        "id": 2,
+        "name": "Week"
+      },
+      "image": "../assets/image/hinh2.jpg",
+      "roomStandard": " 123",
+      "poolArea": 123,
+      "numberOfFloors": "123",
+      "description": " 123",
+      "freeService": " "
+    },
+    {
+      "id": 3,
+      "name": "123",
+      "facilityType": "House",
+      "area": 123,
+      "rentalCost": 1123,
+      "maxPeople": 12,
+      "rentalType": {
+        "id": 3,
+        "name": "Month"
+      },
+      "image": "../assets/image/hinh3.jpg",
+      "roomStandard": " 123",
+      "poolArea": null,
+      "numberOfFloors": "123",
+      "description": " 123",
+      "freeService": " "
+    }
+  ],
+  "contracts": [],
+  "facilityType": [
+    {
+      "id": 1,
+      "name": "Room"
+    },
+    {
+      "id": 2,
+      "name": "House"
+    },
+    {
+      "id": 3,
+      "name": "Villa"
+    }
+  ],
+  "customerType": [
+    {
+      "id": 1,
+      "name": "Member"
+    },
+    {
+      "id": 2,
+      "name": "Silver"
+    },
+    {
+      "id": 3,
+      "name": "Gold"
+    },
+    {
+      "id": 4,
+      "name": "Diamond"
+    }
+  ],
+  "rentalType": [
+    {
+      "id": 1,
+      "name": "Day"
+    },
+    {
+      "id": 2,
+      "name": "Week"
+    },
+    {
+      "id": 3,
+      "name": "Month"
+    },
+    {
+      "id": 4,
+      "name": "Year"
+    }
+  ]
 }

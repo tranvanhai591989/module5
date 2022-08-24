@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomerService} from '../../service/customer/customer.service';
 import {Router} from '@angular/router';
 import {CustomerTypeService} from '../../service/customer/customer-type.service';
@@ -14,9 +14,9 @@ import {ToastrService} from 'ngx-toastr';
 export class CustomerCreateComponent implements OnInit {
 
   customerForm: FormGroup = new FormGroup({
-    id: new FormControl('', [Validators.required]),
+    id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.pattern(/^([A-Z][^A-Z0-9\s]+)(\s[A-Z][^A-Z0-9\s]+)*$/)]),
-    birthday: new FormControl('', [Validators.required]),
+    birthday: new FormControl('', [Validators.required, this.ageValidate]),
     gender: new FormControl('', [Validators.required]),
     idCard: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]),
     phone: new FormControl('', [Validators.required, Validators.pattern(/^([\+84]|[\+091]|[\+090])[0-9]{9,11}$/)]),
@@ -33,16 +33,32 @@ export class CustomerCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.customerTypes = this.customerTypeService.getAll();
+    this.customerTypeService.getAll().subscribe(next => {
+      this.customerTypes = next;
+    });
   }
 
   submit() {
     const customer = this.customerForm.value;
-    this.customerService.saveCustomer(customer);
-    this.customerForm.reset();
-    this.router.navigate(['/customer']);
-    this.toastr.success('Create success', ' ', {
-      timeOut: 1500, progressBar: false
+    this.customerService.saveCustomer(customer).subscribe(value => {
+    }, error => {
+    }, () => {
+      this.customerForm.reset();
+      this.router.navigate(['/customer']);
+      this.toastr.success('Create success', ' ', {
+        timeOut: 1500, progressBar: false
+      });
     });
+
+  }
+
+  ageValidate(dob: AbstractControl) {
+    const now = new Date();
+    const birthDay = new Date(dob.value);
+    const age = now.getFullYear() - birthDay.getFullYear();
+    if (age < 18) {
+      return {ageError: true};
+    }
+    return null;
   }
 }

@@ -10,11 +10,6 @@
           </div>
           <form [formGroup]="facilityForm" (ngSubmit)="submit()">
             <div class="mb-3">
-              <label class="form-label"> Facility Id</label>
-              <input class="form-control" type="number" formControlName="id">
-            </div>
-
-            <div class="mb-3">
               <label class="form-label"> Facility Name</label>
               <input class="form-control" type="text" formControlName="name">
               <p style="color: red"
@@ -26,7 +21,7 @@
             <div class="mb-3">
               <label class="form-label">Facility Type</label>
               <select formControlName="facilityType" class="form-control"
-                      (change)="changeFacility($event.target.value)">
+                      (change)="changeFacility($event.target)">
                 <option value="" disabled selected="selected">Please choose</option>
                 <option *ngFor="let facilityType of facilityTypes"
                         [value]="facilityType.name">{{facilityType.name}}</option>
@@ -35,6 +30,7 @@
                  *ngIf="facilityForm.controls.facilityType.hasError('pattern')&&facilityForm.controls.facilityType.touched">
                 Don't blank
               </p>
+
             </div>
 
             <div class="mb-3">
@@ -43,6 +39,10 @@
               <p style="color: red"
                  *ngIf="facilityForm.controls.area.hasError('min')&&facilityForm.controls.area.touched">
                 Don't less than 30m2
+              </p>
+              <p style="color: red"
+                 *ngIf="facilityForm.controls.area.hasError('required')&&facilityForm.controls.area.touched">
+                Don't blank
               </p>
             </div>
 

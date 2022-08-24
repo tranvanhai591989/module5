@@ -8,10 +8,6 @@
       <div class="body_center-2 container">
         <div class="vc_empty_space" style="height: 32px"><span class="vc_empty_space_inner"></span></div>
         <form [formGroup]="customerForm" (ngSubmit)="submit()" novalidate>
-          <div class="mb-3">
-            <label class="form-label">Id</label>
-            <input class="form-control" type="number" formControlName="id">
-          </div>
 
           <div class="mb-3">
             <label class="form-label">Name</label>
@@ -23,7 +19,11 @@
           </div>
           <div class="mb-3">
             <label class="form-label">Birth Day</label>
-            <input class="form-control" type="date" formControlName="birthday">
+            <input class="form-control" type="date" formControlName="birthday" >
+          </div>
+          <div style="color: red"
+               *ngIf="customerForm.controls.birthday.hasError('ageError')&&customerForm.controls.birthday?.touched">
+            Age than 18
           </div>
 
           <div class="mb-3">

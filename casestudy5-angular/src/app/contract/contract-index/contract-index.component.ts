@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Customer} from '../../model/customer';
-import {CustomerService} from '../../service/customer/customer.service';
 import {Router} from '@angular/router';
 import {Contract} from '../../model/contract';
 import {ContractService} from '../../service/contract/contract.service';
 import {Facility} from '../../model/facility';
-import {FacilityService} from '../../service/facility/facility.service';
 
 @Component({
   selector: 'app-contract-index',
@@ -18,15 +16,18 @@ export class ContractIndexComponent implements OnInit {
   facilityList: Facility [] = [];
   p = 1;
 
-  constructor(private customerService: CustomerService,
-              private contractService: ContractService,
-              private facilityService: FacilityService,
+  constructor(private contractService: ContractService,
               private router: Router) {
   }
 
   ngOnInit(): void {
-    this.customerList = this.customerService.getAll();
-    this.contracts = this.contractService.getAll();
-    this.facilityList = this.facilityService.getAll();
+    this.getAll();
+  }
+
+  getAll() {
+    return this.contractService.getAll().subscribe(next => {
+      this.contracts = next;
+    }, error => {
+    });
   }
 }
