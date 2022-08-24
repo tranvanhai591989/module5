@@ -1,4 +1,19 @@
 <h1>Danh sách sản phẩm</h1>
+<!--<div class="d-flex">-->
+<!--  <input type="search" class="form-control " placeholder="Search By Description" [(ngModel)]="searchName">-->
+<!--  <button class="btn btn-success" (click)="search(searchName)">Tim</button>-->
+<!--</div>-->
+
+<form [formGroup]="searchForm" *ngIf="searchForm" (ngSubmit)="searchDecPrice()">
+  <input class="input-search" type="text" placeholder="Search description"
+         formControlName="description1" name="description">
+  <input class="input-search" type="text" placeholder="Search price"
+         formControlName="price1" name="price">
+  <button class="btn-create scrollto" type="submit">Search</button>
+</form>
+
+
+
 <a routerLink="/product/create">Tạo mới sản phẩm</a>
 <table class="table">
   <tr>
@@ -8,8 +23,8 @@
     <td>Mô tả</td>
     <td colspan="2"></td>
   </tr>
-  <tr *ngFor="let product of products; index as i">
-    <td>{{i + 1}}</td>
+  <tr *ngFor="let product of products | paginate:{itemsPerPage: 4, currentPage: p}; index as i">
+    <th scope="row"> {{(i + 1) + 4 * (p  - 1)}}</th>
     <td>{{product.name.name}}</td>
     <td>{{product.price}}</td>
     <td>{{product.description}}</td>
@@ -42,6 +57,7 @@
       </div>
     </div>
   </tr>
-
-
 </table>
+<div class="container navigation" style="display: flex;justify-content: center;margin-top: 10px">
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

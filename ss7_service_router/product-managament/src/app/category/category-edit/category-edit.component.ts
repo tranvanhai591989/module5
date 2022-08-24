@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {CategoryService} from '../../service/category.service';
 
 @Component({
@@ -13,7 +13,8 @@ export class CategoryEditComponent implements OnInit {
   id: number;
 
   constructor(private categoryService: CategoryService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -34,7 +35,8 @@ export class CategoryEditComponent implements OnInit {
 
   updateCategory(id: number): void {
     const category = this.categoryForm.value;
-    this.categoryService.updateCategory(id, category);
+    this.categoryService.updateCategory(id, category).subscribe(value => {});
     alert('Cập nhật thành công');
+    this.router.navigateByUrl('/category/list');
   }
 }

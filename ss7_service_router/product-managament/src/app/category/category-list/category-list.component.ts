@@ -9,6 +9,8 @@ import {CategoryService} from '../../service/category.service';
 })
 export class CategoryListComponent implements OnInit {
   categories: Category[] = [];
+  name: string;
+  id: number;
 
   constructor(private categoryService: CategoryService) {
   }
@@ -24,4 +26,13 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
+  openDelete(id: number, name: string) {
+    this.id = id;
+    this.name = name;
+  }
+  delete(id: number): void {
+    this.categoryService.deleteCategory(id).subscribe(() => {
+      this.getAll();
+    });
+  }
 }
