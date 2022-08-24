@@ -42,9 +42,10 @@ export class FacilityIndexComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.facilityService.deleteFacility(id);
-    this.facilityService.getAll().subscribe(next => {
-      this.facilitys = next;
+    this.facilityService.deleteFacility(id).subscribe(value => {
+      this.facilityService.getAll().subscribe(next => {
+        this.facilitys = next;
+      });
     });
   }
 }

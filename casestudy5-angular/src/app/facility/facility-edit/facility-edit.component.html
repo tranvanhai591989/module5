@@ -6,7 +6,6 @@
         <div class="body_center_2 container">
           <div style="text-align: center">
             <h3>Edit Facility</h3>
-
           </div>
           <form [formGroup]="facilityForm" (ngSubmit)="submit()">
 
@@ -19,8 +18,9 @@
               <label class="form-label">Facility Type</label>
               <select formControlName="facilityType" class="form-control"
                       (change)="changeFacility($event.target)">
-                <option value="" >Please choose</option>
-                <option *ngFor="let facilityType of facilityTypes" [value]="facilityType.name">{{facilityType.name}}</option>
+                <option value="">Please choose</option>
+                <option *ngFor="let facilityType of facilityTypes"
+                        [value]="facilityType.id">{{facilityType.name}}</option>
               </select>
             </div>
 
@@ -46,7 +46,7 @@
               <select id="customerType" formControlName="rentalType" name="customerType" class="form-control">
                 <option value="" disabled selected="selected">Please choose</option>
                 <option *ngFor="let rentalType of facilityRentalTypes"
-                        [ngValue]="rentalType.name">{{rentalType.name}}</option>
+                        [value]="rentalType.id">{{rentalType.name}}</option>
               </select>
             </div>
 
@@ -63,28 +63,28 @@
               </select>
             </div>
 
-            <div class="mb-3" *ngIf="temp == 'Villa' || temp == 'House'">
+            <div class="mb-3" *ngIf="temp == 3 || temp == 2">
               <label class="form-label">Stand Room</label>
               <input type="text" class=" form-control" formControlName="roomStandard">
             </div>
 
-            <div class="mb-3" *ngIf="temp == 'Villa' || temp =='House'">
+            <div class="mb-3" *ngIf="temp ==3 || temp ==2">
               <label class="form-label">Description other convenience</label>
               <input class=" form-control" type="text" formControlName="description">
 
             </div>
 
-            <div class="mb-3" id="pool" *ngIf="temp == 'Villa' || temp == 'House'">
+            <div class="mb-3" id="pool" *ngIf="temp == 3">
               <label class="form-label">Pool Area</label>
               <input type="number" class="form-control" formControlName="poolArea">
             </div>
 
-            <div class="mb-3" id="floors" *ngIf="temp == 'Villa' || temp== 'House'">
+            <div class="mb-3" id="floors" *ngIf="temp == 3 || temp== 2">
               <label class="form-label">Number of Floors</label>
               <input type="text" class=" form-control" formControlName="numberOfFloors">
             </div>
 
-            <div class="mb-3" id="free" *ngIf="temp == 'Villa' || temp == 'House'|| temp == 'Room'">
+            <div class="mb-3" id="free"  *ngIf="temp == 1">
               <label class="form-label">Free service</label>
               <input type="text" class=" form-control" formControlName="freeService">
             </div>

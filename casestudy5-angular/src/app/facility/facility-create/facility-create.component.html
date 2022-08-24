@@ -24,7 +24,7 @@
                       (change)="changeFacility($event.target)">
                 <option value="" disabled selected="selected">Please choose</option>
                 <option *ngFor="let facilityType of facilityTypes"
-                        [value]="facilityType.name">{{facilityType.name}}</option>
+                        [value]="facilityType.id">{{facilityType.name}}</option>
               </select>
               <p style="color: red"
                  *ngIf="facilityForm.controls.facilityType.hasError('pattern')&&facilityForm.controls.facilityType.touched">
@@ -100,28 +100,28 @@
               </select>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3" *ngIf="temp == 3 || temp == 2">
               <label class="form-label">Stand Room</label>
               <input type="text" class=" form-control" formControlName="roomStandard">
             </div>
 
-            <div class="mb-3" *ngIf="temp == 'Villa' || temp == 'House'">
+            <div class="mb-3" *ngIf="temp == 3 || temp == 2">
               <label class="form-label">Description other convenience</label>
               <input class=" form-control" type="text" formControlName="description" [defaultValue]=" ">
 
             </div>
 
-            <div class="mb-3" id="pool" *ngIf="temp == 'Villa'">
+            <div class="mb-3" id="pool" *ngIf="temp == 3">
               <label class="form-label">Pool Area</label>
               <input type="number" class="form-control" formControlName="poolArea" [defaultValue]=" ">
             </div>
 
-            <div class="mb-3" id="floors" *ngIf="temp == 'Villa' || temp == 'House'">
+            <div class="mb-3" id="floors" *ngIf="temp ==3 || temp ==2">
               <label class="form-label">Number of Floors</label>
               <input type="text" class=" form-control" formControlName="numberOfFloors" [defaultValue]=" ">
             </div>
 
-            <div class="mb-3" id="free" *ngIf="temp == 'Room'">
+            <div class="mb-3" id="free" *ngIf="temp == 1">
               <label class="form-label">Free service</label>
               <input type="text" class=" form-control" formControlName="freeService" [defaultValue]=" ">
             </div>

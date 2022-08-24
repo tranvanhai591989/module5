@@ -19,7 +19,6 @@ export class FacilityCreateComponent implements OnInit {
   temp: string;
 
   facilityForm: FormGroup = new FormGroup({
-    id: new FormControl(''),
     name: new FormControl('', [Validators.required]),
     facilityType: new FormControl('', [Validators.required]),
     area: new FormControl('', [Validators.required, Validators.min(15), Validators.max(300)]),
@@ -52,11 +51,14 @@ export class FacilityCreateComponent implements OnInit {
 
   submit() {
     const facility = this.facilityForm.value;
-    this.facilityService.saveFacility(facility).subscribe(() => {
-      this.facilityForm.reset();
-      this.router.navigate(['/facility']);
-      this.toastr.success('Create success', ' ', {
-        timeOut: 1500, progressBar: false
+    this.facilityTypeService.findFacilityTypeById(this.facilityForm.value.facilityType).subscribe(value => {
+      facility.facilityType = value;
+      this.facilityService.saveFacility(facility).subscribe(() => {
+        this.facilityForm.reset();
+        this.router.navigate(['/facility']);
+        this.toastr.success('Create success', ' ', {
+          timeOut: 1500, progressBar: false
+        });
       });
     });
   }

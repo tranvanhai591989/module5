@@ -7,6 +7,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {FacilityRentalTypeService} from '../../service/facility/FacilityRentalType.service';
+import {Facility} from '../../model/facility';
 
 @Component({
   selector: 'app-facility-edit',
@@ -14,11 +15,26 @@ import {FacilityRentalTypeService} from '../../service/facility/FacilityRentalTy
   styleUrls: ['./facility-edit.component.css']
 })
 export class FacilityEditComponent implements OnInit {
+  facility: Facility;
   facilityRentalTypes: FacilityRentalType[] = [];
   facilityTypes: FacilityType[] = [];
   id: number;
   temp: string;
-  facilityForm: FormGroup;
+  facilityForm = new FormGroup({
+    // id: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required, Validators.pattern(/^([A-Z][^A-Z0-9\s]+)(\s[A-Z][^A-Z0-9\s]+)*$/)]),
+    facilityType: new FormControl('', [Validators.required]),
+    area: new FormControl('', [Validators.required]),
+    rentalCost: new FormControl('', [Validators.required, Validators.min(30000)]),
+    maxPeople: new FormControl('', [Validators.required, Validators.min(1), Validators.max(20)]),
+    rentalType: new FormControl('', [Validators.required]),
+    image: new FormControl('', [Validators.required]),
+    roomStandard: new FormControl('', [Validators.required]),
+    poolArea: new FormControl('', [Validators.required, Validators.min(15)]),
+    numberOfFloors: new FormControl('', [Validators.required, Validators.min(15)]),
+    description: new FormControl('', [Validators.required]),
+    freeService: new FormControl('', [Validators.required]),
+  });
 
   constructor(private facilityRentalTypeService: FacilityRentalTypeService,
               private facilityService: FacilityService,
@@ -26,53 +42,73 @@ export class FacilityEditComponent implements OnInit {
               private activeRouter: ActivatedRoute,
               private toastr: ToastrService,
               private router: Router) {
+    this.activeRouter.paramMap.subscribe((paraMap: ParamMap) => {
+      this.id = +paraMap.get('id');
+    });
   }
 
   ngOnInit(): void {
-    this.facilityTypeService.getAll().subscribe(next => {
-      this.facilityTypes = next;
+    this.facilityTypeService.getAll().subscribe(value => {
+      this.facilityTypes = value;
     });
-    this.facilityRentalTypeService.getAll().subscribe(next => {
-      this.facilityRentalTypes = next;
+    this.facilityRentalTypeService.getAll().subscribe(value1 => {
+      this.facilityRentalTypes = value1;
     });
-    this.activeRouter.paramMap.subscribe((paraMap: ParamMap) => {
-      this.id = +paraMap.get('id');
-      this.getFacility(this.id);
+    const id = Number(this.activeRouter.snapshot.params.id);
+    this.facilityService.findById(id).subscribe(value3 => {
+      this.facility = value3;
+      this.temp = '' + this.facility.facilityType.id;
+    }, error => {
+    }, () => {
+      this.facilityForm.patchValue(this.facility);
+      this.facilityForm.patchValue({facilityType: this.facility.facilityType.id});
+      this.facilityForm.patchValue({rentalType: this.facility.rentalType.id});
     });
   }
 
   submit() {
-    const facility = this.facilityForm.value;
-    this.facilityTypeService.findFacilityTypeById(parseInt(this.facilityForm.value.name)).subscribe(next => {
-      facility.facilityType = next;
-      this.facilityService.updateFacility(this.id, facility);
-      this.facilityForm.reset();
-      this.router.navigate(['facility']);
-      this.toastr.success('Edit success', ' ', {
-        timeOut: 1500, progressBar: false
-      });
+    const facilityUpdate = this.facilityForm.value;
+    this.facilityTypeService.findFacilityTypeById(this.facilityForm.value.facilityType).subscribe(value => {
+      facilityUpdate.facilityType = value;
     });
+    this.facilityRentalTypeService.findById(this.facilityForm.value.rentalType).subscribe(value1 => {
+      facilityUpdate.rentalType = value1;
+
+      if (facilityUpdate.facilityType.id === 1) {
+        facilityUpdate.roomStandard = '';
+        facilityUpdate.poolArea = null;
+        facilityUpdate.numberOfFloors = null;
+        facilityUpdate.description = '';
+        this.facilityService.updateFacility(this.id, facilityUpdate).subscribe(value => {
+          this.facilityForm.reset();
+          this.router.navigate(['facility']);
+          this.toastr.success('Edit success', ' ', {
+            timeOut: 1500, progressBar: false
+          });
+        });
+      } else if (facilityUpdate.facilityType.id === 2) {
+        facilityUpdate.poolArea = null;
+        facilityUpdate.description = '';
+        this.facilityService.updateFacility(this.id, facilityUpdate).subscribe(value => {
+          this.facilityForm.reset();
+          this.router.navigate(['facility']);
+          this.toastr.success('Edit success', ' ', {
+            timeOut: 1500, progressBar: false
+          });
+        });
+      } else {
+        this.facilityService.updateFacility(this.id, facilityUpdate).subscribe(value => {
+          this.facilityForm.reset();
+          this.router.navigate(['facility']);
+          this.toastr.success('Edit success', ' ', {
+            timeOut: 1500, progressBar: false
+          });
+        });
+      }
+    });
+    console.log(facilityUpdate);
   }
 
-  private getFacility(id: number) {
-    this.facilityService.findById(id).subscribe(facility => {
-      this.facilityForm = new FormGroup({
-        id: new FormControl(facility.id, [Validators.required]),
-        name: new FormControl(facility.name, [Validators.required, Validators.pattern(/^([A-Z][^A-Z0-9\s]+)(\s[A-Z][^A-Z0-9\s]+)*$/)]),
-        facilityType: new FormControl(facility.facilityType.name, [Validators.required]),
-        area: new FormControl(facility.area, [Validators.required]),
-        rentalCost: new FormControl(facility.rentalCost, [Validators.required, Validators.min(30000)]),
-        maxPeople: new FormControl(facility.maxPeople, [Validators.required, Validators.min(1), Validators.max(20)]),
-        rentalType: new FormControl(facility.rentalType.name, [Validators.required]),
-        image: new FormControl(facility.image, [Validators.required]),
-        roomStandard: new FormControl(facility.roomStandard, [Validators.required]),
-        poolArea: new FormControl(facility.poolArea, [Validators.required, Validators.min(15)]),
-        numberOfFloors: new FormControl(facility.numberOfFloors, [Validators.required, Validators.min(15)]),
-        description: new FormControl(facility.description, [Validators.required]),
-        freeService: new FormControl(facility.freeService, [Validators.required]),
-      });
-    });
-  }
 
   changeFacility(target: any) {
     this.temp = target.value;

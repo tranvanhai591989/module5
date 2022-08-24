@@ -7,11 +7,16 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class FacilityRentalTypeService {
-  private URL_CATEGORY = 'http://localhost:3000/rentalType';
+  private URL_RENTALTYPE = 'http://localhost:3000/rentalType';
 
   constructor(private http: HttpClient) {
   }
+
   getAll(): Observable<FacilityRentalType[]> {
-    return this.http.get<FacilityRentalType[]>(this.URL_CATEGORY);
+    return this.http.get<FacilityRentalType[]>(this.URL_RENTALTYPE);
+  }
+
+  findById(id: number): Observable<FacilityRentalType> {
+    return this.http.get<FacilityRentalType>(this.URL_RENTALTYPE + '/' + id);
   }
 }

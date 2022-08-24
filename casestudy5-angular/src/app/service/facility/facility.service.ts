@@ -26,34 +26,6 @@ export class FacilityService {
 
   updateFacility(id: number, facility: Facility): Observable<Facility> {
     return this.http.patch<Facility>(this.URL_FACILITY + '/' + id, facility);
-    // if (facility.facilityType === 'Villa') {
-    //   facility.freeService = '';
-    // } else if (facility.facilityType === 'House') {
-    //   facility.freeService = '';
-    // } else if (facility.facilityType === 'Room') {
-    //   facility.description = '';
-    //   facility.freeService = '';
-    //   facility.numberOfFloors = null;
-    //   facility.poolArea = null;
-    // }
-    //
-    // for (const item of this.facilityTypes) {
-    //   if (facility.facilityType === item.name) {
-    //     facility.facilityType = item;
-    //   }
-    // }
-    // for (const item of this.facilityRentalTypes) {
-    //   if (facility.rentalType === item.name) {
-    //     facility.rentalType = item;
-    //   }
-    //
-    //   for (let i = 0; i < this.facilityList.length; i++) {
-    //     if (this.facilityList[i].id === id) {
-    //       this.facilityList[i] = facility;
-    //     }
-    //   }
-    // }
-
   }
 
   deleteFacility(id: number): Observable<Facility> {
